@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiplayer Game</title>
+    <link rel="stylesheet" href="assets/styles/main.css">
+</head>
+<body>
+    <!-- Container für alle Views -->
+    <div id="app"></div>
+
+    <!-- Spiel-Endbildschirm -->
+    <div id="game-over" style="display: none;">
+        <h1>Game Over</h1>
+        <button onclick="location.reload()">Play Again</button>
+    </div>
+
+    <!-- Socket.io Client einbinden -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- Haupt-JavaScript-Datei laden -->
+    <script type="module" src="../src/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+	•	Enthält die statischen Dateien wie das HTML-Grundgerüst, Bilder, Audio-Dateien und die CSS-Dateien für das Styling.
+	•	index.html: Einstiegspunkt der Anwendung, in dem der Canvas für das Spiel gerendert wird.
