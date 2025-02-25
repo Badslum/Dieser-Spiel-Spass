@@ -1,4 +1,4 @@
-# Dieser-Spiel-Spass
+# Snake Strikers
 Projekt in Fortgeschrittene Systementwicklung
 
 Contribution Rules:
