@@ -1,2 +1,2 @@
-# Dieser-Spiel-Spa-
+# Dieser-Spiel-Spass
 Projekt in Fortgeschrittene Systementwicklung
