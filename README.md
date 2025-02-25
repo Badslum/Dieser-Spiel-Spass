@@ -1,2 +1,2 @@
-# Dieser-Spiel-Spa-
+# Snake Strikers
 Projekt in Fortgeschrittene Systementwicklung
