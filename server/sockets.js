@@ -1,5 +1,6 @@
 const io = require('./server');
 
+// Handle socket connections
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
 
@@ -8,7 +9,15 @@ io.on('connection', (socket) => {
     // Process player movement
   });
 
+  // Handle player chat messages
+  socket.on('chatMessage', (data) => {
+    // Broadcast chat message to all players
+    io.emit('chatMessage', data);
+  });
+
+  // Handle player disconnect
   socket.on('disconnect', () => {
-    console.log('A user disconnected:', socket.id);
+    // Broadcast player disconnect to all players
+    io.emit('playerDisconnect', socket.id);
   });
 });
