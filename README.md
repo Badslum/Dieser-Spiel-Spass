@@ -7,6 +7,7 @@ Contribution Rules:
 - Bitte Kommentieren.
 
 **Zuständigkeiten der Einzelnen Mitwirkenden:**
+
 **FRONTEND:**
 
 Finn Wiebe - 
