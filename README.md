@@ -23,15 +23,15 @@ Nils Kerb -
 
 **BACKEND:**
 
-Bastian Roth - Spiel Logik,  Verwaltung von GitHub, Managing von Backend-Tasks
+Bastian Roth - Spiellogik,  Verwaltung von GitHub, Managing von Backend-Tasks
 
-Christian Schantz - Datenspeicherung
+Christian Schantz - Datenspeicherung (Login, Spieler namen, etc)
 
-Christian Weissbrod - Spielstandspeicherung
+Christian Weissbrod - Spielstandspeicherung (Prozent der Spielflächen, Lebende Spieler, etc)
 
-Deniz Firat - Websockets
+Deniz Firat - Websockets (Kommunikation zwischen Client und Server)
 
 Miriam Leixner - Spiellogik
 
-Mikias Zadek - Security
+Mikias Zadek - Security (Login, Botschutz)
 
