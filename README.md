@@ -10,7 +10,7 @@ Contribution Rules:
 
 **FRONTEND:**
 
-Finn Wiebe - UI, PlayerMovement, Graphiken
+Finn Wiebe - UI, PlayerMovement, Grafiken
 
 Jakob Elfner - Index mit Hauptmenu, Login
 
