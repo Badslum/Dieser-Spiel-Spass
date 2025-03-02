@@ -10,15 +10,15 @@ Contribution Rules:
 
 **FRONTEND:**
 
-Finn Wiebe - 
+Finn Wiebe - UI, PlayerMovement, Graphiken
 
-Jakob Elfner -
+Jakob Elfner - Index mit Hauptmenu, Login
 
-Min Hwang -
+Min Hwang - UI und Minimap, Spielflächen, Playercount und Timer
 
-Noah Boess -
+Noah Boess - Index mit Hauptmenu, Login
 
-Nils Kerb -
+Nils Kerb - UI und Minimap, Spielflächen, Playercount und Timer
 
 
 **BACKEND:**
