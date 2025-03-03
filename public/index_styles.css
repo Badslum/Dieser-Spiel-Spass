@@ -8,37 +8,45 @@ body {
     background-color: #f0f0f0;
 }
 .container {
-    background-color: #fff;
+    background-color: #3b3740;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
 .container h1 {
+    margin-top: 0;
     margin-bottom: 20px;
+    color: #f0f0f0;
+}
+p {
+    color: #f0f0f0;
 }
 .container input[type="text"],
 .container input[type="password"] {
-    width: 100%;
+    width: 75%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 .container button {
-    width: 100%;
+    width: 75%;
     padding: 10px;
-    background-color: #4CAF50;
+    margin: 10px 0;
+    background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 .container button:hover {
-    background-color: #45a049;
+    color: #3b3740;
+    background-color: #f0f0f0;
 }
 .container a {
-    display: block;
+    display: inline;
     margin-top: 10px;
     color: #007BFF;
     text-decoration: none;
