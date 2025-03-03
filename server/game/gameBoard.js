@@ -38,15 +38,19 @@ function placeObstacles() {
 
 
 // Collision detection
+// Worldbordercollision prevents movement
 function borderCollision(player){
-    if (player.x < 0 || player.x >= width || player.y < 0 || player.y >= height) {
-        player.alive = false; //? Movement stop of Killed?
+    if (player.x < 0 || player.x >= width) {
+        Input.x = 0;
+    } else if (player.y < 0 || player.y >= height){
+        Input.y = 0;
     };
 }
 
+// Obstaclecollision kills players
 function obstacleCollision(player){
     if (grid[player.x][player.y] === "obstacle") {
-        player.alive = false; //? Obstacle kill? Or introduce as variant?
+        player.alive = false;
     };
 }
 
