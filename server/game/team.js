@@ -4,7 +4,10 @@
 // Created by:      Miriam Leixner on 02.03.2025
 // Last updated by: Miriam Leixner on 04.03.2025
 //
+<<<<<<< HEAD
 // ToDo for Miriam
+=======
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 
 //definition of variables
 let team = {
@@ -41,11 +44,15 @@ function createTeam(playerPool, x) {
 
 //To Do: Assign percententage of gameboard to each team? Varible needed?
 
+<<<<<<< HEAD
 //export the functions
 module.exports = { createTeam };
 
 //Test for createTeam
 /*
+=======
+//Test for createTeam
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 let playerPool = 10;
 let x = 3;
 let teams = createTeam(playerPool, x);
@@ -60,5 +67,9 @@ console.log(`Team 2 Color: ${teams[1].color}`);
 
 console.log(`Team 3 ID: ${teams[2].id}`);
 console.log(`Team 3 Members: ${teams[2].no_members}`);
+<<<<<<< HEAD
 console.log(`Team 3 Color: ${teams[2].color}`);
 */
+=======
+console.log(`Team 3 Color: ${teams[2].color}`);
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620

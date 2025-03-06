@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // 
 // Description: Backend-functions to create player, move player and check if player is alive.
 //
@@ -6,6 +7,8 @@
 //
 // ToDo for Miriam
 
+=======
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 const assert = require('assert');
 const { createPlayer, movePlayer } = require('../server/game/player');
 
@@ -19,7 +22,11 @@ describe('Player Functions', function() {
   it('should move the player correctly', function() {
     const player = createPlayer('testuser', 123);
     player.x = 0;
+<<<<<<< HEAD
     player.y = 11;
+=======
+    player.y = 0;
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
     movePlayer(player, 'up');
     assert.strictEqual(player.y, 12);
     movePlayer(player, 'right');

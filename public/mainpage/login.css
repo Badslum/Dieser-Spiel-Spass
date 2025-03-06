@@ -1,8 +1,107 @@
+<<<<<<< HEAD
 /* Allgemeines Styling */
+=======
+<<<<<<< HEAD
+@import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+
+/* 🌆 Hintergrund */
+=======
+/* Allgemeines Styling */
+>>>>>>> 7364c673941bffa42d8739797e5389767cb23011
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    background-color: #3b3b3b; /* Dunkelgrauer Hintergrund */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Füllt die gesamte Höhe */
+    width: 100vw; /* Füllt die gesamte Breite */
+}
+
+/* 📦 Hauptcontainer */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    padding: 15px;
+    background-color: #2a2a2a; /* Dunkleres Grau für Kontrast */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 🐍 Logo */
+#logo {
+    width: 240px; /* Verdoppelt die vorherige Breite */
+    max-width: 30vw; /* Passt sich dynamisch an die Bildschirmgröße an */
+    margin-bottom: 0px;
+}
+
+/* ✨ Überschrift */
+#animated-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: bold;
+}
+
+/* 🔑 Login-Text */
+#login-text {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+/* 📝 Eingabefelder */
+.input-field {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+
+/* 🖱️ Login-Button */
+#login-button {
+    width: 95%;
+    padding: 12px;
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+#login-button:hover {
+    background-color: #0056b3;
+}
+
+/* 📜 Alternativ-Text */
+#alternative-text {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    line-height: 1.2; /* Verringert Abstand zwischen den Zeilen */
+}
+
+#alternative-text a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+#alternative-text a:hover {
+    text-decoration: underline;
+}
+=======
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
     background-color: #1E1E1E;
     color: white;
     text-align: center;
@@ -193,4 +292,9 @@ p {
     margin-top: 10px;
     color: #007BFF;
     text-decoration: none;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7364c673941bffa42d8739797e5389767cb23011
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
