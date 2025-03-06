@@ -2,18 +2,14 @@
 // Description: Backend-functions to create player, move player and check if player is alive.
 //
 // Created by:      Miriam Leixner on 02.03.2025
-// Last updated by: Miriam Leixner on 02.03.2025
+// Last updated by: Miriam Leixner on 04.03.2025
 //
 // ToDo for Miriam
 
-//To Do!! verfolgen wann und wo eingebener Username und Spielerdaten gespeichert wird
+/*To Do!! verfolgen wann und wo eingebener Username und Spielerdaten gespeichert wird
 import username from "./../public/App.js"
 import playerid from "./../public/App.js"
-
-
-// Is player alive?
-// Create "tail" for player, evtl with length restrictions?
-
+*/
 
 //definition of variables
 let player = {
@@ -21,18 +17,21 @@ let player = {
     id: 0,
     teamid: 0,
     alive: true,
-    x ,
-    y
+    x: 0,
+    y: 0,
+    //To do define working tail  tail: [x,y]
 }
 let direction = ""
 
 //function createPLayer
 //To do: playerid und username aus App.js importieren
-function createPlayer(username, playerid) {
-    this.name = username,
-    this.id = playerid
+//To do: do I need to assign a starting point(x,y) for the player?
+function createPlayer(name, playerid) {
+   return {
+        name: name,
+        id: playerid,
+        };
 }
-
 
 //function movePlayer
 function movePlayer(player, direction) {
@@ -53,6 +52,13 @@ function movePlayer(player, direction) {
 
 }
 
+// Create "tail" for player, evtl with length restrictions?
+//Tail starts at players territory and grows with each step the player takes
+//function createTail
+
+
+
+//function checkTeam
 function checkTeam(player){
     if(player.teamid === 0){
         team = 0
@@ -65,7 +71,6 @@ function checkTeam(player){
             team = 2
             console.log("Player belongs to team 2 (red)")
         }
-       
     }
     else(
         console.log("Error: team not identified")
@@ -79,14 +84,19 @@ function checkAlive(player) {
     }
 }
 
+// Export the functions
+module.exports = {
+    createPlayer,
+    movePlayer
+};
 
 //Tests
 
 //Test for createPLayer
-const player1 = createPlayer(Testuser, 123);
-console.log("Player name should be: username");
-console.log("Player name is: " + player1.name);
-console.log("Player id should be: playerid");
+const player1 = createPlayer(`testuser`, 123);
+console.log("Player name should be: testuser");
+console.log("Player name is:"  + player1.name);
+console.log("Player id should be: 123");
 console.log("Player id is: " + player1.id);
 
 //Test for movePlayer
@@ -97,3 +107,8 @@ movePlayer(player, "right");
 
 console.log("player position should be: 1, 1");
 console.log("player position is: " + `${player.x}, ${player.y}`);
+
+//Test for checkTeam
+player1.teamid = 2;
+checkTeam(player1);
+console.log("Player belongs to team 1 (blue)");
