@@ -96,6 +96,29 @@ registerLinkFromGuest.addEventListener('click', () => openModal(registerModal));
 loginLinkFromGuest.addEventListener('click', () => openModal(loginModal));
 
 
+
+
+// Funktion zum Schließen des Modals, wenn außerhalb geklickt wird
+function closeModalOnOutsideClick() {
+    window.addEventListener('click', function(event) {
+        const modals = document.querySelectorAll('.modal'); // Alle Modale auswählen
+        
+        modals.forEach(modal => {
+            if (event.target === modal) { // Prüfen, ob der Klick außerhalb des Inhalts war
+                modal.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Funktion aufrufen, um das Verhalten zu aktivieren
+closeModalOnOutsideClick();
+
+
+
+
+
+
 // SNAKE ANIMATION
 
 const canvas = document.getElementById("snakeCanvas");
