@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Strikers</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Snake Strikers</h1>
+
+   
+    
+    <div class="game-container">
+        <div class="ui-container">
+            <div id="area-display">
+                <span id="area-percentage">Fläche: 0%</span>
+            </div>
+            <div id="mini-map-container">
+                <canvas id="mini-map"></canvas>
+            </div>
+    
+        </div>
+        
+        <canvas id="gameCanvas"></canvas>
+
+    </div>
+
+    <script type="module" src="game.js"></script>
+    <script type="module" src="ui.js"></script>
+    <script src="miniMap.js" type="module"></script>
+</body>
+</html>
