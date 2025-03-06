@@ -1,4 +1,4 @@
-import { movePlayer } from "./movement.js";
+import { movePlayer } from "../movement.js";
 
 export class Player {
     constructor(x, y, color, grid) {
