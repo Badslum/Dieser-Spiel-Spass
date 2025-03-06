@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #121212, #1e3a5f);
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh; /* Ermöglicht Scrollen, falls notwendig */
+    overflow-x: hidden;
+}
+
+
+
+
+/* Canvas für Schlangen-Animation - bleibt HINTER dem Content */
+#snakeCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Liegt hinter dem UI-Content, aber über dem Hintergrund */
+    pointer-events: none; /* Verhindert, dass es Eingaben blockiert */
+}
+
+/* Hauptinhalt über dem Canvas */
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+
+
+
+
+
+/* Der Hauptcontainer */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 500px;
+    margin-top: 5vh; /* Sorgt für gleichmäßigen Abstand zum oberen Rand */
+    margin-bottom: 5vh; /* Sorgt für Platz nach unten */
+}
+
+/* Logo mit festem oberen Abstand */
+.logo {
+    width: 120px;
+    margin-bottom: 3vh;
+}
+
+/* Überschrift mit festem Abstand zum Logo */
+.animated-title {
+    font-size: clamp(1.8em, 4vw, 2.5em);
+    animation: glow 1.5s infinite alternate;
+    margin-bottom: 5vh;
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 5px #fff; }
+    100% { text-shadow: 0 0 20px #00ccff; }
+}
+
+/* Info-Kästen mit dynamischem Abstand */
+.info-box {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 3vh;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0px 0px 15px rgba(0, 204, 255, 0.3);
+    margin-bottom: 5vh; /* Hält den Abstand zwischen den Kästen gleich */
+}
+
+/* Buttons mit dynamischem Abstand */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+button {
+    background: #00ccff;
+    border: none;
+    padding: 2vh;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    max-width: 300px;
+    margin: 2vh;
+}
+
+button:hover {
+    background: #0088cc;
+}
+
+/* Footer bleibt unten, verschiebt sich aber falls nötig */
+footer {
+    width: 100%;
+    padding: 1vh;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    text-align: center;
+    margin-top: auto;
+}

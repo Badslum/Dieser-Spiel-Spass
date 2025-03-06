@@ -1,15 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Main Menu - Snake Strikers</title>
-    <link rel="stylesheet" href="index_styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Strikers</title>
+    <link rel="stylesheet" href="mainpage.css">
+    <script defer src="mainpage.js"></script>
 </head>
+<body>
 
-<body> 
+    <canvas id="snakeCanvas"></canvas> <!-- Hintergrundanimation -->
+
     <div class="container">
-        <p> Das hier ist ein Test-Text </p>
-        <button onclick="location.href='login.html'"">Return</button>
+        <img src="Logo_Transparent.png" alt="Snake Strikers Logo" class="logo">
+        <h1 class="animated-title">Snake Strikers</h1>
+
+        <div class="info-box">
+            <h2>📜 Spielprinzip</h2>
+            <p>🐍 Steuere eine Schlange und sammle Punkte</p>
+            <p>🛑 Vermeide Hindernisse und andere Schlangen</p>
+            <p>🚀 Nutze Power-Ups für Vorteile</p>
+        </div>
+        <div class="info-box">
+            <h2>🎮 Steuerung</h2>
+            <p>⬆️ W - Hoch</p>
+            <p>⬇️ S - Runter</p>
+            <p>⬅️ A - Links</p>
+            <p>➡️ D - Rechts</p>
+        </div>
+        <div class="info-box">
+            <h2>🏆 Ziele</h2>
+            <p>🔝 Erreiche die höchste Punktzahl</p>
+            <p>⚔️ Überlebe so lange wie möglich</p>
+            <p>🔥 Besiege andere Spieler</p>
+        </div>
+        <button id="loginBtn">Login / Register</button>
+        <script src="mainpage.js"></script>
     </div>
+
+    <footer>
+        <p>© 2025 Snake Strikers | Datenschutz | Impressum</p>
+    </footer>
+
 </body>
 </html>
