@@ -100,4 +100,3 @@ function animate() {
 }
 
 animate();
-
