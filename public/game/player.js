@@ -1,4 +1,4 @@
-import { movePlayer } from "../movement.js";
+import { movePlayer } from "./movement.js";
 
 export class Player {
     constructor(x, y, color, grid) {
@@ -8,7 +8,7 @@ export class Player {
         this.tempTrail = [];
         this.direction = "right";
         this.moveTime = performance.now();
-        this.speed = 90;
+        this.speed = 50;
         this.isMoving = false;
         this.gridSize = 15;
         this.alive = true;
