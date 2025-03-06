@@ -19,7 +19,7 @@ function createGameBoard(width, height, obstacles) {
             grid[i][j] = null;
         }
     }
-  return gameBoard;
+  return grid;
 }
 
 
