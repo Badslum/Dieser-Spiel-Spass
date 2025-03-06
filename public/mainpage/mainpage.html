@@ -6,6 +6,64 @@
     <title>Snake Strikers</title>
     <link rel="stylesheet" href="mainpage.css">
     <script defer src="mainpage.js"></script>
+    <style>
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .input-field {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 95%;
+            padding: 12px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #alternative-text a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        #alternative-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,9 +74,9 @@
         <h1 class="animated-title">Snake Strikers</h1>
 
         <div class="info-box">
-            <h2>📜 Spielprinzip</h2>
+            <h2>📛 Spielprinzip</h2>
             <p>🐍 Steuere eine Schlange und sammle Punkte</p>
-            <p>🛑 Vermeide Hindernisse und andere Schlangen</p>
+            <p>🚑 Vermeide Hindernisse und andere Schlangen</p>
             <p>🚀 Nutze Power-Ups für Vorteile</p>
         </div>
         <div class="info-box">
@@ -34,13 +92,47 @@
             <p>⚔️ Überlebe so lange wie möglich</p>
             <p>🔥 Besiege andere Spieler</p>
         </div>
-        <button id="loginBtn">Login / Register</button>
-        <script src="mainpage.js"></script>
+
+        <!-- Login/Register Button -->
+        <button id="loginBtn">Einloggen / Registrieren</button>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <input type="text" class="input-field" id="login-username" placeholder="Username">
+            <input type="password" class="input-field" id="login-password" placeholder="Passwort">
+            <button id="login-button">Einloggen</button>
+            <p id="alternative-text"><a href="#" id="registerLink">Registrieren</a> oder <a href="#" id="guestLink">als Gast fortfahren</a></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <h2>Registrieren</h2>
+            <input type="text" class="input-field" id="register-username" placeholder="Username">
+            <input type="password" class="input-field" id="register-password" placeholder="Passwort">
+            <button id="register-button">Registrieren</button>
+            <p id="alternative-text"><a href="#" id="loginLink">Einloggen</a> oder <a href="#" id="guestLinkFromRegister">als Gast fortfahren</a></p>
+        </div>
+    </div>
+
+    <!-- Guest Modal -->
+    <div id="guestModal" class="modal">
+        <div class="modal-content">
+            <h2>Als Gast spielen</h2>
+            <input type="text" class="input-field" id="guest-username" placeholder="Username">
+            <button id="guest-button">Als Gast fortfahren</button>
+            <p id="alternative-text"><a href="#" id="registerLinkFromGuest">Registrieren</a> oder <a href="#" id="loginLinkFromGuest">Einloggen</a></p>
+        </div>
     </div>
 
     <footer>
         <p>© 2025 Snake Strikers | Datenschutz | Impressum</p>
     </footer>
 
+ 
 </body>
 </html>
