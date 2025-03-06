@@ -32,7 +32,11 @@ document.getElementById("loginBtn").addEventListener("click", function () {
 });
 
 
+<<<<<<< HEAD
+// SNAKE ANIMATION
+=======
 /* SNAKE ANIMATION
+>>>>>>> 7364c673941bffa42d8739797e5389767cb23011
 
 const canvas = document.getElementById("snakeCanvas");
 const ctx = canvas.getContext("2d");
@@ -100,6 +104,8 @@ function animate() {
 }
 
 animate();
+<<<<<<< HEAD
+=======
  */
 
 // MAUSZEIGER Snake Animation
@@ -232,3 +238,4 @@ function animate() {
 }
 
 animate();
+>>>>>>> 7364c673941bffa42d8739797e5389767cb23011
