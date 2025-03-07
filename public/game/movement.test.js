@@ -3,7 +3,7 @@ import { updateMiniMap } from "./miniMap.js";
 import { handlePlayerDeath } from "./playerDeath.js";
 import { captureEnclosedArea } from "./areaCapture.js";
 
-//Mock-Funktionen:Isoliertes ausführen der eigenen Funktionen
+//Mock-Funktionen:Isoliertes ausführen der einzelnenen Funktionen
 jest.mock("./miniMap.js");
 jest.mock("./playerDeath.js");
 jest.mock("./areaCapture.js");
