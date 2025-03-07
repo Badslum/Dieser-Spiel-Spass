@@ -3,6 +3,7 @@ import { updateMiniMap } from "./miniMap.js";
 import { handlePlayerDeath } from "./playerDeath.js";
 import { captureEnclosedArea } from "./areaCapture.js";
 
+//Mock-Funktionen:Isoliertes ausführen der eigenen Funktionen
 jest.mock("./miniMap.js");
 jest.mock("./playerDeath.js");
 jest.mock("./areaCapture.js");
@@ -27,6 +28,7 @@ describe("movePlayer", () => {
         };
     });
 
+    //Movement Directions
     test("should move right when direction is 'right'", () => {
         movePlayer(player);
         expect(player.x).toBe(2);
@@ -54,6 +56,7 @@ describe("movePlayer", () => {
         expect(player.y).toBe(2);
     });
 
+    //Special condititons
     test("should not move if player is dead", () => {
         player.alive = false;
         movePlayer(player);
