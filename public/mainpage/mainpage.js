@@ -23,22 +23,34 @@ function openModal(modal) {
 
 // Funktion zur Überprüfung der Eingabe und Anzeige der Fehlermeldung
 function validateInput(inputField, errorMessage) {
-    let errorElement = inputField.nextElementSibling;
+    let formGroup = inputField.parentNode; // Der direkte Container des Eingabefelds
+    let passwordField = formGroup.querySelector('input[type="password"]'); // Passwortfeld im gleichen Container suchen
 
+    if (!passwordField) {
+        passwordField = inputField; // Falls kein Passwortfeld existiert (z.B. Gast-Login)
+    }
+
+    let errorElement = passwordField.nextElementSibling;
+
+    // Falls die Fehlermeldung noch nicht existiert oder an falscher Stelle ist, neu erstellen
     if (!errorElement || !errorElement.classList.contains('error-message')) {
         errorElement = document.createElement('p');
         errorElement.classList.add('error-message');
         errorElement.style.color = 'red';
         errorElement.style.fontSize = '0.8rem';
         errorElement.style.marginTop = '5px';
-        inputField.parentNode.insertBefore(errorElement, inputField.nextSibling);
+
+        passwordField.parentNode.insertBefore(errorElement, passwordField.nextSibling);
     }
 
+    // Fehler setzen oder entfernen
     if (inputField.value.trim() === '') {
         errorElement.textContent = errorMessage;
         return false;
     } else {
-        errorElement.textContent = ''; // Entfernt die Fehlermeldung, falls korrekt
+        if (errorElement.textContent === errorMessage) {
+            errorElement.textContent = ''; // Entfernt nur die spezifische Fehlermeldung
+        }
         return true;
     }
 }
@@ -85,6 +97,26 @@ function saveGuestName(username) {
     setCookie('guestNames', JSON.stringify(guestList), 24);
 }
 
+// Funktion zum Aktualisieren des "Join Game"-Buttons basierend auf Session Storage
+function updateJoinButton() {
+    const guestUser = sessionStorage.getItem('guestUser');
+
+    if (guestUser) {
+        loginBtn.textContent = 'Join Game';
+        loginBtn.style.display = 'block';
+        loginBtn.onclick = () => window.location.href = '../game/game.html';
+    } else {
+        loginBtn.textContent = 'Login / Register';
+        loginBtn.style.display = 'block';
+        loginBtn.onclick = () => openModal(loginModal);
+    }
+}
+
+// Beim Laden der Seite prüfen, ob ein Gast eingeloggt ist
+document.addEventListener("DOMContentLoaded", function() {
+    updateJoinButton();
+});
+
 // Login-Validierung
 loginButton.addEventListener('click', function() {
     const username = document.getElementById('login-username');
@@ -97,17 +129,76 @@ loginButton.addEventListener('click', function() {
     if (valid) closeModals();
 });
 
-// Registrierung-Validierung
-registerButton.addEventListener('click', function() {
+// Funktion zur Überprüfung des Usernames (Max. 10 Zeichen, keine Sonderzeichen)
+function validateUsername(usernameField) {
+    const username = usernameField.value.trim();
+    const usernamePattern = /^[a-zA-Z0-9]{1,10}$/; // Nur Buchstaben & Zahlen, max. 10 Zeichen
+    let errorElement = usernameField.nextElementSibling;
+
+    if (!errorElement || !errorElement.classList.contains('error-message')) {
+        errorElement = document.createElement('p');
+        errorElement.classList.add('error-message');
+        errorElement.style.color = 'red';
+        errorElement.style.fontSize = '0.8rem';
+        errorElement.style.marginTop = '5px';
+        usernameField.parentNode.insertBefore(errorElement, usernameField.nextSibling);
+    }
+
+    if (username === "") {
+        errorElement.textContent = "Bitte einen Benutzernamen eingeben.";
+        return false;
+    } else if (!usernamePattern.test(username)) {
+        errorElement.textContent = "Max. 10 Zeichen, keine Sonderzeichen erlaubt!";
+        return false;
+    } else {
+        errorElement.textContent = "";
+        return true;
+    }
+}
+
+// Funktion zur Überprüfung des Passworts (Min. 5 Zeichen)
+function validatePassword(passwordField) {
+    const password = passwordField.value.trim();
+    let errorElement = passwordField.nextElementSibling;
+
+    if (!errorElement || !errorElement.classList.contains('error-message')) {
+        errorElement = document.createElement('p');
+        errorElement.classList.add('error-message');
+        errorElement.style.color = 'red';
+        errorElement.style.fontSize = '0.8rem';
+        errorElement.style.marginTop = '5px';
+        passwordField.parentNode.insertBefore(errorElement, passwordField.nextSibling);
+    }
+
+    if (password === "") {
+        errorElement.textContent = "Bitte ein Passwort eingeben.";
+        return false;
+    } else if (password.length < 5) {
+        errorElement.textContent = "Passwort muss mindestens 5 Zeichen lang sein!";
+        return false;
+    } else {
+        errorElement.textContent = "";
+        return true;
+    }
+}
+
+// Registrierung-Validierung mit vollständiger Fehlerbehandlung
+registerButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Verhindert das Standardverhalten
+
     const username = document.getElementById('register-username');
     const password = document.getElementById('register-password');
 
-    let valid = true;
-    if (!validateInput(username, 'Bitte einen Benutzernamen eingeben.')) valid = false;
-    if (!validateInput(password, 'Bitte ein Passwort eingeben.')) valid = false;
+    let isUsernameValid = validateUsername(username);
+    let isPasswordValid = validatePassword(password);
 
-    if (valid) openModal(loginModal); // Öffnet direkt das Login-Modal
+    // Login-Modal NUR öffnen, wenn beide Eingaben gültig sind
+    if (isUsernameValid && isPasswordValid) {
+        openModal(loginModal); // Öffnet das Login-Modal nur, wenn keine Fehler
+    }
 });
+
+
 
 // Validierung für Gast-Login mit Überprüfung auf doppelte Usernames
 guestButton.addEventListener('click', function() {
@@ -133,20 +224,19 @@ guestButton.addEventListener('click', function() {
     } else {
         errorElement.textContent = ''; // Fehler entfernen
         saveGuestName(username);
+        sessionStorage.setItem('guestUser', username); // Speichert Gast-Login in Session
+        updateJoinButton(); // Aktualisiert den Button-Status
         closeModals();
     }
 });
 
-// Funktion zum Schließen der Modale und Anzeigen des "Join Game"-Buttons
+// Funktion zum Schließen der Modale
 function closeModals() {
     loginModal.style.display = 'none';
     registerModal.style.display = 'none';
     guestModal.style.display = 'none';
-    
-    loginBtn.textContent = 'Join Game';
-    loginBtn.style.display = 'block';
 
-    loginBtn.onclick = () => window.location.href = '../game/game.html';
+    updateJoinButton();
 }
 
 // Modal-Wechsel-Events
@@ -161,10 +251,10 @@ loginLinkFromGuest.addEventListener('click', () => openModal(loginModal));
 // Funktion zum Schließen des Modals, wenn außerhalb geklickt wird
 function closeModalOnOutsideClick() {
     window.addEventListener('click', function(event) {
-        const modals = document.querySelectorAll('.modal'); // Alle Modale auswählen
+        const modals = document.querySelectorAll('.modal');
         
         modals.forEach(modal => {
-            if (event.target === modal) { // Prüfen, ob der Klick außerhalb des Inhalts war
+            if (event.target === modal) {
                 modal.style.display = 'none';
             }
         });
@@ -174,18 +264,53 @@ function closeModalOnOutsideClick() {
 // Funktion aufrufen, um das Verhalten zu aktivieren
 closeModalOnOutsideClick();
 
+
+
+
 // Account Dropdown
 
-// Dropdown Toggle
+// Funktion zur Aktualisierung des Account-Dropdowns für Gäste
+function updateAccountDropdown() {
+    const guestUser = sessionStorage.getItem('guestUser'); // Überprüfung auf Gastbenutzer
+    const guestLoginOptions = document.getElementById("guestLoginOptions");
+    const usernameDisplay = document.getElementById("usernameDisplay");
+
+    if (guestUser) {
+        usernameDisplay.textContent = guestUser; // Gast-Name anzeigen
+        guestLoginOptions.style.display = "block"; // "Einloggen / Registrieren" anzeigen
+    } else {
+        usernameDisplay.textContent = "Benutzer"; // Standardname
+        guestLoginOptions.style.display = "none"; // Verstecken, wenn kein Gast
+    }
+}
+
+// Beim Laden der Seite das Account-Dropdown einmal aktualisieren
+document.addEventListener("DOMContentLoaded", function() {
+    updateAccountDropdown();
+});
+
+// Dropdown Toggle für das Account-Icon
 accountIcon.addEventListener("click", (event) => {
     event.stopPropagation();
+    
+    // Vor dem Umschalten aktualisieren, aber das Dropdown nicht beeinflussen
+    updateAccountDropdown();
+
+    // Öffne oder schließe das Dropdown normal
     accountDropdown.style.display = accountDropdown.style.display === "block" ? "none" : "block";
 });
 
+// Schließt das Dropdown, wenn außerhalb geklickt wird
 document.addEventListener("click", (event) => {
     if (!accountIcon.contains(event.target) && !accountDropdown.contains(event.target)) {
         accountDropdown.style.display = "none";
     }
+});
+
+// Funktion zum Öffnen des Login-Modals beim Klick auf "Einloggen / Registrieren"
+document.getElementById("dropdownLogin").addEventListener("click", function(event) {
+    event.preventDefault();
+    openModal(loginModal); // Öffne das Login-Modal
 });
 
 // Passwort ändern Modal öffnen über Account-Icon
@@ -212,7 +337,6 @@ savePassword.addEventListener("click", () => {
         alert("Passwörter stimmen nicht überein!");
     }
 });
-
 
 
 
