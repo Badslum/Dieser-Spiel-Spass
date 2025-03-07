@@ -21,10 +21,10 @@ function openModal(modal) {
     modal.style.display = 'flex';
 }
 
-// Funktion zur Überprüfung der Eingabe
+// Funktion zur Überprüfung der Eingabe und Anzeige der Fehlermeldung
 function validateInput(inputField, errorMessage) {
     let errorElement = inputField.nextElementSibling;
-    
+
     if (!errorElement || !errorElement.classList.contains('error-message')) {
         errorElement = document.createElement('p');
         errorElement.classList.add('error-message');
@@ -38,38 +38,101 @@ function validateInput(inputField, errorMessage) {
         errorElement.textContent = errorMessage;
         return false;
     } else {
-        errorElement.textContent = '';
+        errorElement.textContent = ''; // Entfernt die Fehlermeldung, falls korrekt
         return true;
     }
 }
 
-// Validierung der Login-Eingaben
+// Funktion zum Setzen eines Cookies (Speicherung für 24 Stunden)
+function setCookie(name, value, hours) {
+    const date = new Date();
+    date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+}
+
+// Funktion zum Abrufen eines Cookies
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (let cookie of cookies) {
+        let [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === name) {
+            return cookieValue;
+        }
+    }
+    return null;
+}
+
+// Funktion zum Überprüfen, ob ein Gastname bereits vergeben ist
+function isGuestNameTaken(username) {
+    const storedGuestNames = getCookie('guestNames');
+    if (storedGuestNames) {
+        const guestList = JSON.parse(storedGuestNames);
+        return guestList.includes(username);
+    }
+    return false;
+}
+
+// Funktion zum Speichern eines neuen Gastnamens in den Cookies
+function saveGuestName(username) {
+    let guestList = [];
+
+    const storedGuestNames = getCookie('guestNames');
+    if (storedGuestNames) {
+        guestList = JSON.parse(storedGuestNames);
+    }
+
+    guestList.push(username);
+    setCookie('guestNames', JSON.stringify(guestList), 24);
+}
+
+// Login-Validierung
 loginButton.addEventListener('click', function() {
     const username = document.getElementById('login-username');
     const password = document.getElementById('login-password');
 
-    if (validateInput(username, 'Bitte einen Benutzernamen eingeben.') &&
-        validateInput(password, 'Bitte ein Passwort eingeben.')) {
-        closeModals();
-    }
+    let valid = true;
+    if (!validateInput(username, 'Bitte einen Benutzernamen eingeben.')) valid = false;
+    if (!validateInput(password, 'Bitte ein Passwort eingeben.')) valid = false;
+
+    if (valid) closeModals();
 });
 
-// Validierung der Registrierung (leitet nach erfolgreicher Registrierung zum Login-Modal weiter)
+// Registrierung-Validierung
 registerButton.addEventListener('click', function() {
     const username = document.getElementById('register-username');
     const password = document.getElementById('register-password');
 
-    if (validateInput(username, 'Bitte einen Benutzernamen eingeben.') &&
-        validateInput(password, 'Bitte ein Passwort eingeben.')) {
-        openModal(loginModal); // Öffnet direkt das Login-Modal
-    }
+    let valid = true;
+    if (!validateInput(username, 'Bitte einen Benutzernamen eingeben.')) valid = false;
+    if (!validateInput(password, 'Bitte ein Passwort eingeben.')) valid = false;
+
+    if (valid) openModal(loginModal); // Öffnet direkt das Login-Modal
 });
 
-// Validierung für Gast-Login
+// Validierung für Gast-Login mit Überprüfung auf doppelte Usernames
 guestButton.addEventListener('click', function() {
-    const username = document.getElementById('guest-username');
+    const usernameField = document.getElementById('guest-username');
+    const username = usernameField.value.trim();
+    
+    let errorElement = usernameField.nextElementSibling;
+    if (!errorElement || !errorElement.classList.contains('error-message')) {
+        errorElement = document.createElement('p');
+        errorElement.classList.add('error-message');
+        errorElement.style.color = 'red';
+        errorElement.style.fontSize = '0.8rem';
+        errorElement.style.marginTop = '5px';
+        usernameField.parentNode.insertBefore(errorElement, usernameField.nextSibling);
+    }
 
-    if (validateInput(username, 'Bitte einen Benutzernamen eingeben.')) {
+    if (!validateInput(usernameField, 'Bitte einen Benutzernamen eingeben.')) {
+        return;
+    }
+
+    if (isGuestNameTaken(username)) {
+        errorElement.textContent = 'Dieser Benutzername ist bereits vergeben. Bitte wähle einen anderen.';
+    } else {
+        errorElement.textContent = ''; // Fehler entfernen
+        saveGuestName(username);
         closeModals();
     }
 });
@@ -111,9 +174,6 @@ function closeModalOnOutsideClick() {
 // Funktion aufrufen, um das Verhalten zu aktivieren
 closeModalOnOutsideClick();
 
-
-
-
 // Account Dropdown
 
 // Dropdown Toggle
@@ -152,6 +212,12 @@ savePassword.addEventListener("click", () => {
         alert("Passwörter stimmen nicht überein!");
     }
 });
+
+
+
+
+
+
 
 
 
