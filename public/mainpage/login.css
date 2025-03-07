@@ -1,14 +1,20 @@
 <<<<<<< HEAD
+/* Allgemeines Styling */
+=======
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
 
 /* 🌆 Hintergrund */
 =======
 /* Allgemeines Styling */
 >>>>>>> 7364c673941bffa42d8739797e5389767cb23011
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
     background-color: #3b3b3b; /* Dunkelgrauer Hintergrund */
     color: white;
@@ -95,6 +101,7 @@ body {
     text-decoration: underline;
 }
 =======
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
     background-color: #1E1E1E;
     color: white;
     text-align: center;
@@ -285,5 +292,9 @@ p {
     margin-top: 10px;
     color: #007BFF;
     text-decoration: none;
+<<<<<<< HEAD
+}
+=======
 }
 >>>>>>> 7364c673941bffa42d8739797e5389767cb23011
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620

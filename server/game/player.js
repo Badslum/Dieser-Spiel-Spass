@@ -91,7 +91,11 @@ module.exports = {
 };
 
 //Tests
+<<<<<<< HEAD
+/*
+=======
 
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 //Test for createPLayer
 const player1 = createPlayer(`testuser`, 123);
 console.log("Player name should be: testuser");
@@ -111,4 +115,9 @@ console.log("player position is: " + `${player.x}, ${player.y}`);
 //Test for checkTeam
 player1.teamid = 2;
 checkTeam(player1);
+<<<<<<< HEAD
 console.log("Player belongs to team 1 (blue)");
+*/
+=======
+console.log("Player belongs to team 1 (blue)");
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
