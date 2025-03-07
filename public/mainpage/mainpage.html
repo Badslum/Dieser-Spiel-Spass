@@ -9,11 +9,21 @@
 </head>
 <body>
 
-    <canvas id="snakeCanvas"></canvas> <!-- Hintergrundanimation -->
+    <canvas id="snakeCanvas"></canvas>
 
     <div class="container">
         <img src="Logo_Transparent.png" alt="Snake Strikers Logo" class="logo">
         <h1 class="animated-title">Snake Strikers</h1>
+    </div>
+
+    <!-- Account Icon -->
+    <div class="account-container">
+        <img src="account_icon.png" alt="Account" class="account-icon" id="accountIcon">
+        <div class="dropdown" id="accountDropdown">
+            <p id="usernameDisplay">Benutzer</p>
+            <a href="#" id="changePassword">Passwort ändern</a>
+        </div>
+    </div>
 
         <div class="info-box">
             <h2>📛 Spielprinzip</h2>
@@ -47,6 +57,7 @@
             <input type="password" class="input-field" id="login-password" placeholder="Passwort">
             <button id="login-button">Einloggen</button>
             <p id="alternative-text"><a href="#" id="registerLink">Registrieren</a> oder <a href="#" id="guestLink">als Gast fortfahren</a></p>
+            <p id="alternative-text"><a href="#" id="forgotPassword">Passwort ändern</a></p>
         </div>
     </div>
 
@@ -70,6 +81,17 @@
             <p id="alternative-text"><a href="#" id="registerLinkFromGuest">Registrieren</a> oder <a href="#" id="loginLinkFromGuest">Einloggen</a></p>
         </div>
     </div>
+
+       <!-- Passwort ändern Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2>Passwort ändern</h2>
+            <input type="password" id="newPassword" class="input-field" placeholder="Neues Passwort">
+            <input type="password" id="confirmPassword" class="input-field" placeholder="Passwort bestätigen">
+            <button id="savePassword">Speichern</button>
+        </div>
+    </div>
+
 
     <footer>
         <p>© 2025 Snake Strikers | <a href="datenschutz.html">Datenschutz</a> | <a href="impressum.html">Impressum</a></p>

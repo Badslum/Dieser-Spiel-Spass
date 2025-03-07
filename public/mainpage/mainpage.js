@@ -95,9 +95,6 @@ guestLinkFromRegister.addEventListener('click', () => openModal(guestModal));
 registerLinkFromGuest.addEventListener('click', () => openModal(registerModal));
 loginLinkFromGuest.addEventListener('click', () => openModal(loginModal));
 
-
-
-
 // Funktion zum Schließen des Modals, wenn außerhalb geklickt wird
 function closeModalOnOutsideClick() {
     window.addEventListener('click', function(event) {
@@ -113,6 +110,48 @@ function closeModalOnOutsideClick() {
 
 // Funktion aufrufen, um das Verhalten zu aktivieren
 closeModalOnOutsideClick();
+
+
+
+
+// Account Dropdown
+
+// Dropdown Toggle
+accountIcon.addEventListener("click", (event) => {
+    event.stopPropagation();
+    accountDropdown.style.display = accountDropdown.style.display === "block" ? "none" : "block";
+});
+
+document.addEventListener("click", (event) => {
+    if (!accountIcon.contains(event.target) && !accountDropdown.contains(event.target)) {
+        accountDropdown.style.display = "none";
+    }
+});
+
+// Passwort ändern Modal öffnen über Account-Icon
+changePassword.addEventListener("click", (event) => {
+    event.preventDefault();
+    passwordModal.style.display = "flex";
+    accountDropdown.style.display = "none";
+});
+
+// Passwort ändern Modal öffnen über "Passwort vergessen?"
+forgotPassword.addEventListener("click", (event) => {
+    event.preventDefault();
+    passwordModal.style.display = "flex";
+});
+
+// Passwort speichern
+savePassword.addEventListener("click", () => {
+    if (newPassword.value === confirmPassword.value && newPassword.value !== "") {
+        alert("Passwort wurde geändert!");
+        passwordModal.style.display = "none";
+        newPassword.value = "";
+        confirmPassword.value = "";
+    } else {
+        alert("Passwörter stimmen nicht überein!");
+    }
+});
 
 
 

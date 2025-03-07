@@ -115,7 +115,6 @@ footer a:hover, footer a:active {
     color: gray;
 }
 
-
 .back-button {
     position: fixed;
     top: 10px;
@@ -131,8 +130,6 @@ footer a:hover, footer a:active {
     width: 40px;
     margin-right: 10px;
 }
-
-
 
 .modal {
     display: none;
@@ -182,6 +179,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
+    margin-bottom: 40px;
 }
 
 button:hover {
@@ -197,3 +195,46 @@ button:hover {
     text-decoration: underline;
 }
 
+
+/* Account Dropdown */
+.account-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.account-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 150px;
+    padding: 10px;
+}
+
+.dropdown p {
+    color: black; /* Benutzername jetzt sichtbar */
+    font-weight: bold;
+    margin: 0;
+    padding: 5px;
+}
+
+.dropdown a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.dropdown a:hover {
+    background: #f0f0f0;
+}
