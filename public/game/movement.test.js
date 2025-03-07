@@ -9,8 +9,9 @@ jest.mock("./playerDeath.js");
 jest.mock("./areaCapture.js");
 
 describe("movePlayer", () => {
+    //Deklarierung der Player-Variable
     let player;
-
+    //Platzierung des Spielers auf Feld 1/1 vor Ausführung
     beforeEach(() => {
         player = {
             x: 1,
@@ -76,6 +77,7 @@ describe("movePlayer", () => {
         player.direction = "right";
         movePlayer(player);
         expect(handlePlayerDeath).toHaveBeenCalledWith(player);
+        //To have been Called With prüft hier, ob die Fkt durch den Spieler selbst getriggert wurde
     });
 
     test("should update minimap", () => {
