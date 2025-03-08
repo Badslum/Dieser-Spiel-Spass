@@ -1,8 +1,12 @@
+// === Globale Variablen ===
 const loginBtn = document.getElementById('loginBtn');
 const loginModal = document.getElementById('loginModal');
 const registerModal = document.getElementById('registerModal');
 const guestModal = document.getElementById('guestModal');
+const accountIcon = document.getElementById('accountIcon');
+const accountDropdown = document.getElementById('accountDropdown');
 
+// Modal-Links
 const registerLink = document.getElementById('registerLink');
 const guestLink = document.getElementById('guestLink');
 const loginLink = document.getElementById('loginLink');
@@ -10,139 +14,67 @@ const guestLinkFromRegister = document.getElementById('guestLinkFromRegister');
 const registerLinkFromGuest = document.getElementById('registerLinkFromGuest');
 const loginLinkFromGuest = document.getElementById('loginLinkFromGuest');
 
+// Buttons
 const loginButton = document.getElementById('login-button');
 const registerButton = document.getElementById('register-button');
 const guestButton = document.getElementById('guest-button');
 
+// === Modal-Funktionen ===
 function openModal(modal) {
     loginModal.style.display = 'none';
     registerModal.style.display = 'none';
     guestModal.style.display = 'none';
     modal.style.display = 'flex';
+    updateModalLinks();
 }
 
-// Funktion zur Überprüfung der Eingabe und Anzeige der Fehlermeldung
+function closeModals() {
+    loginModal.style.display = 'none';
+    registerModal.style.display = 'none';
+    guestModal.style.display = 'none';
+}
+
+function closeModalOnOutsideClick() {
+    window.addEventListener('click', function(event) {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+}
+
+// === Validierungs-Funktionen ===
 function validateInput(inputField, errorMessage) {
-    let formGroup = inputField.parentNode; // Der direkte Container des Eingabefelds
-    let passwordField = formGroup.querySelector('input[type="password"]'); // Passwortfeld im gleichen Container suchen
-
-    if (!passwordField) {
-        passwordField = inputField; // Falls kein Passwortfeld existiert (z.B. Gast-Login)
-    }
-
+    let formGroup = inputField.parentNode;
+    let passwordField = formGroup.querySelector('input[type="password"]') || inputField;
     let errorElement = passwordField.nextElementSibling;
 
-    // Falls die Fehlermeldung noch nicht existiert oder an falscher Stelle ist, neu erstellen
     if (!errorElement || !errorElement.classList.contains('error-message')) {
         errorElement = document.createElement('p');
         errorElement.classList.add('error-message');
         errorElement.style.color = 'red';
         errorElement.style.fontSize = '0.8rem';
         errorElement.style.marginTop = '5px';
-
         passwordField.parentNode.insertBefore(errorElement, passwordField.nextSibling);
     }
 
-    // Fehler setzen oder entfernen
     if (inputField.value.trim() === '') {
         errorElement.textContent = errorMessage;
         return false;
     } else {
         if (errorElement.textContent === errorMessage) {
-            errorElement.textContent = ''; // Entfernt nur die spezifische Fehlermeldung
+            errorElement.textContent = '';
         }
         return true;
     }
 }
 
-// Funktion zum Setzen eines Cookies (Speicherung für 24 Stunden)
-function setCookie(name, value, hours) {
-    const date = new Date();
-    date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
-    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
-}
-
-// Funktion zum Abrufen eines Cookies
-function getCookie(name) {
-    const cookies = document.cookie.split('; ');
-    for (let cookie of cookies) {
-        let [cookieName, cookieValue] = cookie.split('=');
-        if (cookieName === name) {
-            return cookieValue;
-        }
-    }
-    return null;
-}
-
-// Funktion zum Überprüfen, ob ein Gastname bereits vergeben ist
-function isGuestNameTaken(username) {
-    const storedGuestNames = getCookie('guestNames');
-    if (storedGuestNames) {
-        const guestList = JSON.parse(storedGuestNames);
-        return guestList.includes(username);
-    }
-    return false;
-}
-
-// Funktion zum Speichern eines neuen Gastnamens in den Cookies
-function saveGuestName(username) {
-    let guestList = [];
-
-    const storedGuestNames = getCookie('guestNames');
-    if (storedGuestNames) {
-        guestList = JSON.parse(storedGuestNames);
-    }
-
-    guestList.push(username);
-    setCookie('guestNames', JSON.stringify(guestList), 24);
-}
-
-// Funktion zum Aktualisieren des "Join Game"-Buttons basierend auf Session Storage
-function updateJoinButton() {
-    const guestUser = sessionStorage.getItem('guestUser');
-
-    if (guestUser) {
-        loginBtn.textContent = 'Join Game';
-        loginBtn.style.display = 'block';
-        loginBtn.onclick = () => window.location.href = '../game/game.html';
-    } else {
-        loginBtn.textContent = 'Login / Register';
-        loginBtn.style.display = 'block';
-        loginBtn.onclick = () => openModal(loginModal);
-    }
-}
-
-// Beim Laden der Seite prüfen, ob ein Gast eingeloggt ist
-document.addEventListener("DOMContentLoaded", function() {
-    updateJoinButton();
-});
-
-// Login-Validierung
-loginButton.addEventListener('click', function() {
-    const username = document.getElementById('login-username');
-    const password = document.getElementById('login-password');
-
-    let valid = true;
-    if (!validateInput(username, 'Bitte einen Benutzernamen eingeben.')) valid = false;
-    if (!validateInput(password, 'Bitte ein Passwort eingeben.')) valid = false;
-
-    if (valid) closeModals();
-});
-
-// Funktion zur Überprüfung des Usernames (Max. 10 Zeichen, keine Sonderzeichen)
 function validateUsername(usernameField) {
     const username = usernameField.value.trim();
-    const usernamePattern = /^[a-zA-Z0-9]{1,10}$/; // Nur Buchstaben & Zahlen, max. 10 Zeichen
-    let errorElement = usernameField.nextElementSibling;
-
-    if (!errorElement || !errorElement.classList.contains('error-message')) {
-        errorElement = document.createElement('p');
-        errorElement.classList.add('error-message');
-        errorElement.style.color = 'red';
-        errorElement.style.fontSize = '0.8rem';
-        errorElement.style.marginTop = '5px';
-        usernameField.parentNode.insertBefore(errorElement, usernameField.nextSibling);
-    }
+    const usernamePattern = /^[a-zA-Z0-9]{1,10}$/;
+    let errorElement = createErrorElement(usernameField);
 
     if (username === "") {
         errorElement.textContent = "Bitte einen Benutzernamen eingeben.";
@@ -156,19 +88,9 @@ function validateUsername(usernameField) {
     }
 }
 
-// Funktion zur Überprüfung des Passworts (Min. 5 Zeichen)
 function validatePassword(passwordField) {
     const password = passwordField.value.trim();
-    let errorElement = passwordField.nextElementSibling;
-
-    if (!errorElement || !errorElement.classList.contains('error-message')) {
-        errorElement = document.createElement('p');
-        errorElement.classList.add('error-message');
-        errorElement.style.color = 'red';
-        errorElement.style.fontSize = '0.8rem';
-        errorElement.style.marginTop = '5px';
-        passwordField.parentNode.insertBefore(errorElement, passwordField.nextSibling);
-    }
+    let errorElement = createErrorElement(passwordField);
 
     if (password === "") {
         errorElement.textContent = "Bitte ein Passwort eingeben.";
@@ -182,160 +104,208 @@ function validatePassword(passwordField) {
     }
 }
 
-// Registrierung-Validierung mit vollständiger Fehlerbehandlung
-registerButton.addEventListener('click', function(event) {
-    event.preventDefault(); // Verhindert das Standardverhalten
-
-    const username = document.getElementById('register-username');
-    const password = document.getElementById('register-password');
-
-    let isUsernameValid = validateUsername(username);
-    let isPasswordValid = validatePassword(password);
-
-    // Login-Modal NUR öffnen, wenn beide Eingaben gültig sind
-    if (isUsernameValid && isPasswordValid) {
-        openModal(loginModal); // Öffnet das Login-Modal nur, wenn keine Fehler
-    }
-});
-
-
-
-// Validierung für Gast-Login mit Überprüfung auf doppelte Usernames
-guestButton.addEventListener('click', function() {
-    const usernameField = document.getElementById('guest-username');
-    const username = usernameField.value.trim();
-    
-    let errorElement = usernameField.nextElementSibling;
+function createErrorElement(field) {
+    let errorElement = field.nextElementSibling;
     if (!errorElement || !errorElement.classList.contains('error-message')) {
         errorElement = document.createElement('p');
         errorElement.classList.add('error-message');
         errorElement.style.color = 'red';
         errorElement.style.fontSize = '0.8rem';
         errorElement.style.marginTop = '5px';
-        usernameField.parentNode.insertBefore(errorElement, usernameField.nextSibling);
+        field.parentNode.insertBefore(errorElement, field.nextSibling);
     }
+    return errorElement;
+}
+
+// === Cookie- und Session-Funktionen ===
+function setCookie(name, value, hours) {
+    const date = new Date();
+    date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (let cookie of cookies) {
+        let [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === name) {
+            return cookieValue;
+        }
+    }
+    return null;
+}
+
+function isGuestNameTaken(username) {
+    const storedGuestNames = getCookie('guestNames');
+    if (storedGuestNames) {
+        const guestList = JSON.parse(storedGuestNames);
+        return guestList.includes(username);
+    }
+    return false;
+}
+
+function saveGuestName(username) {
+    let guestList = [];
+    const storedGuestNames = getCookie('guestNames');
+    if (storedGuestNames) {
+        guestList = JSON.parse(storedGuestNames);
+    }
+    guestList.push(username);
+    setCookie('guestNames', JSON.stringify(guestList), 24);
+}
+
+// === Button- und Dropdown-Funktionen ===
+function updateJoinButton() {
+    const guestUser = sessionStorage.getItem('guestUser');
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+
+    if (guestUser || loggedInUser) {
+        loginBtn.textContent = 'Join Game';
+        loginBtn.style.display = 'block';
+        loginBtn.onclick = () => window.location.href = '../game/game.html';
+    } else {
+        loginBtn.textContent = 'Login / Register';
+        loginBtn.style.display = 'block';
+        loginBtn.onclick = () => openModal(loginModal);
+    }
+}
+
+function updateAccountDropdown() {
+    const guestUser = sessionStorage.getItem('guestUser');
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+    const guestLoginOptions = document.getElementById("guestLoginOptions");
+    const usernameDisplay = document.getElementById("usernameDisplay");
+
+    if (guestUser || loggedInUser) {
+        usernameDisplay.textContent = guestUser || loggedInUser;
+        guestLoginOptions.style.display = "block";
+    } else {
+        usernameDisplay.textContent = "Benutzer";
+        guestLoginOptions.style.display = "none";
+    }
+}
+
+function updateModalLinks() {
+    const guestUser = sessionStorage.getItem('guestUser');
+    const loginAlternativeText = loginModal.querySelector('#alternative-text');
+    const registerAlternativeText = registerModal.querySelector('#alternative-text');
+
+    if (guestUser) {
+        loginAlternativeText.innerHTML = 
+            `<a href="#" id="registerLink">Registrieren</a>`;
+        registerAlternativeText.innerHTML = 
+            `<a href="#" id="loginLink">Einloggen</a>`;
+
+        loginModal.querySelector('#registerLink').addEventListener('click', () => openModal(registerModal));
+        registerModal.querySelector('#loginLink').addEventListener('click', () => openModal(loginModal));
+    } else {
+        loginAlternativeText.innerHTML = 
+            `<a href="#" id="registerLink">Registrieren</a> oder ` +
+            `<a href="#" id="guestLink">als Gast fortfahren</a>`;
+        registerAlternativeText.innerHTML = 
+            `<a href="#" id="loginLink">Einloggen</a> oder ` +
+            `<a href="#" id="guestLinkFromRegister">als Gast fortfahren</a>`;
+
+        loginModal.querySelector('#registerLink').addEventListener('click', () => openModal(registerModal));
+        loginModal.querySelector('#guestLink').addEventListener('click', () => openModal(guestModal));
+        registerModal.querySelector('#loginLink').addEventListener('click', () => openModal(loginModal));
+        registerModal.querySelector('#guestLinkFromRegister').addEventListener('click', () => openModal(guestModal));
+    }
+}
+
+// === Event-Listener ===
+// Seite geladen
+document.addEventListener("DOMContentLoaded", function() {
+    updateJoinButton();
+    updateAccountDropdown();
+    closeModalOnOutsideClick();
+    updateModalLinks();
+});
+
+// Login-Handler
+loginButton.addEventListener('click', function() {
+    const username = document.getElementById('login-username');
+    const password = document.getElementById('login-password');
+
+    let valid = true;
+    if (!validateInput(username, 'Bitte einen Benutzernamen eingeben.')) valid = false;
+    if (!validateInput(password, 'Bitte ein Passwort eingeben.')) valid = false;
+
+    if (valid) {
+        sessionStorage.setItem('loggedInUser', username.value);
+        closeModals();
+        updateJoinButton();
+        updateAccountDropdown();
+        updateModalLinks();
+    }
+});
+
+// Registrierungs-Handler
+registerButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('register-username');
+    const password = document.getElementById('register-password');
+
+    let isUsernameValid = validateUsername(username);
+    let isPasswordValid = validatePassword(password);
+
+    if (isUsernameValid && isPasswordValid) {
+        openModal(loginModal);
+    }
+});
+
+// Gast-Login-Handler
+guestButton.addEventListener('click', function() {
+    const usernameField = document.getElementById('guest-username');
+    const username = usernameField.value.trim();
+    let errorElement = createErrorElement(usernameField);
 
     if (!validateInput(usernameField, 'Bitte einen Benutzernamen eingeben.')) {
         return;
     }
 
     if (isGuestNameTaken(username)) {
-        errorElement.textContent = 'Dieser Benutzername ist bereits vergeben. Bitte wähle einen anderen.';
+        errorElement.textContent = 'Dieser Benutzername ist bereits vergeben.';
     } else {
-        errorElement.textContent = ''; // Fehler entfernen
+        errorElement.textContent = '';
         saveGuestName(username);
-        sessionStorage.setItem('guestUser', username); // Speichert Gast-Login in Session
-        updateJoinButton(); // Aktualisiert den Button-Status
+        sessionStorage.setItem('guestUser', username);
+        updateJoinButton();
+        updateAccountDropdown();
+        updateModalLinks();
         closeModals();
     }
 });
 
-// Funktion zum Schließen der Modale
-function closeModals() {
-    loginModal.style.display = 'none';
-    registerModal.style.display = 'none';
-    guestModal.style.display = 'none';
-
-    updateJoinButton();
-}
-
-// Modal-Wechsel-Events
+// Modal-Wechsel
 loginBtn.addEventListener('click', () => openModal(loginModal));
 registerLink.addEventListener('click', () => openModal(registerModal));
-guestLink.addEventListener('click', () => openModal(guestModal));
+guestLink.addEventListener('click', () => {
+    if (!sessionStorage.getItem('guestUser')) openModal(guestModal);
+});
 loginLink.addEventListener('click', () => openModal(loginModal));
-guestLinkFromRegister.addEventListener('click', () => openModal(guestModal));
+guestLinkFromRegister.addEventListener('click', () => {
+    if (!sessionStorage.getItem('guestUser')) openModal(guestModal);
+});
 registerLinkFromGuest.addEventListener('click', () => openModal(registerModal));
 loginLinkFromGuest.addEventListener('click', () => openModal(loginModal));
 
-// Funktion zum Schließen des Modals, wenn außerhalb geklickt wird
-function closeModalOnOutsideClick() {
-    window.addEventListener('click', function(event) {
-        const modals = document.querySelectorAll('.modal');
-        
-        modals.forEach(modal => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-    });
-}
-
-// Funktion aufrufen, um das Verhalten zu aktivieren
-closeModalOnOutsideClick();
-
-
-
-
-// Account Dropdown
-
-// Funktion zur Aktualisierung des Account-Dropdowns für Gäste
-function updateAccountDropdown() {
-    const guestUser = sessionStorage.getItem('guestUser'); // Überprüfung auf Gastbenutzer
-    const guestLoginOptions = document.getElementById("guestLoginOptions");
-    const usernameDisplay = document.getElementById("usernameDisplay");
-
-    if (guestUser) {
-        usernameDisplay.textContent = guestUser; // Gast-Name anzeigen
-        guestLoginOptions.style.display = "block"; // "Einloggen / Registrieren" anzeigen
-    } else {
-        usernameDisplay.textContent = "Benutzer"; // Standardname
-        guestLoginOptions.style.display = "none"; // Verstecken, wenn kein Gast
-    }
-}
-
-// Beim Laden der Seite das Account-Dropdown einmal aktualisieren
-document.addEventListener("DOMContentLoaded", function() {
-    updateAccountDropdown();
-});
-
-// Dropdown Toggle für das Account-Icon
+// Account-Dropdown
 accountIcon.addEventListener("click", (event) => {
     event.stopPropagation();
-    
-    // Vor dem Umschalten aktualisieren, aber das Dropdown nicht beeinflussen
     updateAccountDropdown();
-
-    // Öffne oder schließe das Dropdown normal
     accountDropdown.style.display = accountDropdown.style.display === "block" ? "none" : "block";
 });
 
-// Schließt das Dropdown, wenn außerhalb geklickt wird
 document.addEventListener("click", (event) => {
     if (!accountIcon.contains(event.target) && !accountDropdown.contains(event.target)) {
         accountDropdown.style.display = "none";
     }
 });
 
-// Funktion zum Öffnen des Login-Modals beim Klick auf "Einloggen / Registrieren"
 document.getElementById("dropdownLogin").addEventListener("click", function(event) {
     event.preventDefault();
-    openModal(loginModal); // Öffne das Login-Modal
-});
-
-// Passwort ändern Modal öffnen über Account-Icon
-changePassword.addEventListener("click", (event) => {
-    event.preventDefault();
-    passwordModal.style.display = "flex";
-    accountDropdown.style.display = "none";
-});
-
-// Passwort ändern Modal öffnen über "Passwort vergessen?"
-forgotPassword.addEventListener("click", (event) => {
-    event.preventDefault();
-    passwordModal.style.display = "flex";
-});
-
-// Passwort speichern
-savePassword.addEventListener("click", () => {
-    if (newPassword.value === confirmPassword.value && newPassword.value !== "") {
-        alert("Passwort wurde geändert!");
-        passwordModal.style.display = "none";
-        newPassword.value = "";
-        confirmPassword.value = "";
-    } else {
-        alert("Passwörter stimmen nicht überein!");
-    }
+    openModal(loginModal);
 });
 
 
