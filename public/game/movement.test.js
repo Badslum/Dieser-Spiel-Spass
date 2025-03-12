@@ -3,13 +3,23 @@ import { updateMiniMap } from "./miniMap.js";
 import { handlePlayerDeath } from "./playerDeath.js";
 import { captureEnclosedArea } from "./areaCapture.js";
 
+<<<<<<< HEAD
+=======
+//Mock-Funktionen:Isoliertes ausführen der einzelnenen Funktionen
+>>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
 jest.mock("./miniMap.js");
 jest.mock("./playerDeath.js");
 jest.mock("./areaCapture.js");
 
 describe("movePlayer", () => {
+<<<<<<< HEAD
     let player;
 
+=======
+    //Deklarierung der Player-Variable
+    let player;
+    //Platzierung des Spielers auf Feld 1/1 vor Ausführung
+>>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
     beforeEach(() => {
         player = {
             x: 1,
@@ -27,6 +37,10 @@ describe("movePlayer", () => {
         };
     });
 
+<<<<<<< HEAD
+=======
+    //Movement Directions
+>>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
     test("should move right when direction is 'right'", () => {
         movePlayer(player);
         expect(player.x).toBe(2);
@@ -54,6 +68,10 @@ describe("movePlayer", () => {
         expect(player.y).toBe(2);
     });
 
+<<<<<<< HEAD
+=======
+    //Special condititons
+>>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
     test("should not move if player is dead", () => {
         player.alive = false;
         movePlayer(player);
@@ -73,6 +91,10 @@ describe("movePlayer", () => {
         player.direction = "right";
         movePlayer(player);
         expect(handlePlayerDeath).toHaveBeenCalledWith(player);
+<<<<<<< HEAD
+=======
+        //To have been Called With prüft hier, ob die Fkt durch den Spieler selbst getriggert wurde
+>>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
     });
 
     test("should update minimap", () => {

@@ -8,11 +8,11 @@
 
 // Gameboard creation and obstacle placement
 const gameBoard = [width, height, obstacles];
-let width = int = 170;
 let height = int = 100;
+let width = int = height / 9 * 16; // Format 16:9 is forced
 let obstacles = true;
 
-function createGameBoard(width, height, obstacles) {
+function createGameBoard(width, height) {
     const grid = [];
     for (i = 0; i < width; i++) {
         for (j = 0; j < height; j++) {
@@ -28,7 +28,7 @@ function placeObstacles() {
     if(obstacles == true){
         for (i = 0; i < width; i++) {
             for (j = 0; j < height; j++) {
-                if (Math.random() < 0.1) {
+                if (Math.random() < 0.2) {
                     grid[i][j] = "obstacle";
                 }
             }

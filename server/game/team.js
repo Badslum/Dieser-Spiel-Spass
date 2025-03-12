@@ -9,6 +9,9 @@
 =======
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 
+// ToDo for Miriam
+
+
 //definition of variables
 let team = {
     id: 0,
@@ -45,6 +48,9 @@ function createTeam(playerPool, x) {
 //To Do: Assign percententage of gameboard to each team? Varible needed?
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
 //export the functions
 module.exports = { createTeam };
 
@@ -69,7 +75,12 @@ console.log(`Team 3 ID: ${teams[2].id}`);
 console.log(`Team 3 Members: ${teams[2].no_members}`);
 <<<<<<< HEAD
 console.log(`Team 3 Color: ${teams[2].color}`);
+
+=======
+<<<<<<< HEAD
+console.log(`Team 3 Color: ${teams[2].color}`);
 */
 =======
 console.log(`Team 3 Color: ${teams[2].color}`);
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
