@@ -4,13 +4,7 @@
   "description": "Projekt in Fortgeschrittene Systementwicklung",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
     "test": "mocha"
-=======
-    "start": "node server/server.js",
-    "test": "mocha",
-    "lint": "eslint ."
->>>>>>> backend
   },
   "keywords": [
     "Snakes, Snake, Snider, Systementwicklung, Game, SnakeSniders"
@@ -28,12 +22,6 @@
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
-<<<<<<< HEAD
-=======
-    "@eslint/js": "^9.21.0",
-    "eslint": "^8.57.1",
-    "globals": "^16.0.0",
->>>>>>> backend
     "mocha": "^10.2.0"
   }
 }
