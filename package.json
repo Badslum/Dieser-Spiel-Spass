@@ -4,13 +4,9 @@
   "description": "Projekt in Fortgeschrittene Systementwicklung",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
     "start": "node server/server.js",
     "test": "mocha",
     "lint": "eslint ."
-=======
-    "test": "mocha"
->>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
   },
   "keywords": [
     "Snakes, Snake, Snider, Systementwicklung, Game, SnakeSniders"
@@ -18,16 +14,19 @@
   "author": "BastianRoth, MiriamLeixner",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.12.1",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@eslint/js": "^9.21.0",
     "eslint": "^8.57.1",
     "globals": "^16.0.0",
-=======
->>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
     "mocha": "^10.2.0"
   }
 }
