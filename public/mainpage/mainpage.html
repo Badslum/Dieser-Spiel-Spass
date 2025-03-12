@@ -8,39 +8,81 @@
     <script defer src="mainpage.js"></script>
 </head>
 <body>
-
-    <canvas id="snakeCanvas"></canvas> <!-- Hintergrundanimation -->
+    <canvas id="snakeCanvas"></canvas>
 
     <div class="container">
         <img src="Logo_Transparent.png" alt="Snake Strikers Logo" class="logo">
         <h1 class="animated-title">Snake Strikers</h1>
+    </div>
 
-        <div class="info-box">
-            <h2>📜 Spielprinzip</h2>
-            <p>🐍 Steuere eine Schlange und sammle Punkte</p>
-            <p>🛑 Vermeide Hindernisse und andere Schlangen</p>
-            <p>🚀 Nutze Power-Ups für Vorteile</p>
+    <!-- Account Icon -->
+    <div class="account-container">
+        <img src="account_icon.png" alt="Account" class="account-icon" id="accountIcon">
+        <div class="dropdown" id="accountDropdown">
+            <p id="usernameDisplay">Account</p>
+            <div id="guestLoginOptions" style="display: none;">
+                <a href="#" id="dropdownLogin">Einloggen / Registrieren</a>
+            </div>
         </div>
-        <div class="info-box">
-            <h2>🎮 Steuerung</h2>
-            <p>⬆️ W - Hoch</p>
-            <p>⬇️ S - Runter</p>
-            <p>⬅️ A - Links</p>
-            <p>➡️ D - Rechts</p>
+    </div>
+
+    <div class="info-box">
+        <h2>📛 Spielprinzip</h2>
+        <p>🐍 Steuere eine Schlange und erobere Gebiete</p>
+        <p>🚑 Vermeide Hindernisse und andere Schlangen</p>
+        <p>🚀 Nutze Power-Ups für Vorteile</p>
+    </div>
+    <div class="info-box">
+        <h2>🎮 Steuerung</h2>
+        <p>⬆️ W - Hoch</p>
+        <p>⬇️ S - Runter</p>
+        <p>⬅️ A - Links</p>
+        <p>➡️ D - Rechts</p>
+    </div>
+    <div class="info-box">
+        <h2>🏆 Ziele</h2>
+        <p>〽️ Erobere die Map mit deinem Team</p>
+        <p>⚔️ Überlebe so lange wie möglich</p>
+        <p>🔥 Besiege andere Spieler</p>
+    </div>
+
+    <!-- Login/Register Button -->
+    <button id="loginBtn">Einloggen / Registrieren</button>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <input type="text" class="input-field" id="login-username" placeholder="Username">
+            <input type="password" class="input-field" id="login-password" placeholder="Passwort">
+            <button id="login-button">Einloggen</button>
+            <p id="alternative-text"><a href="#" id="registerLink">Registrieren</a> oder <a href="#" id="guestLink">als Gast fortfahren</a></p>
         </div>
-        <div class="info-box">
-            <h2>🏆 Ziele</h2>
-            <p>🔝 Erreiche die höchste Punktzahl</p>
-            <p>⚔️ Überlebe so lange wie möglich</p>
-            <p>🔥 Besiege andere Spieler</p>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <h2>Registrieren</h2>
+            <input type="text" class="input-field" id="register-username" placeholder="Username">
+            <input type="password" class="input-field" id="register-password" placeholder="Passwort">
+            <button id="register-button">Registrieren</button>
+            <p id="alternative-text"><a href="#" id="loginLink">Einloggen</a> oder <a href="#" id="guestLinkFromRegister">als Gast fortfahren</a></p>
         </div>
-        <button id="loginBtn">Login / Register</button>
-        <script src="mainpage.js"></script>
+    </div>
+
+    <!-- Guest Modal -->
+    <div id="guestModal" class="modal">
+        <div class="modal-content">
+            <h2>Als Gast spielen</h2>
+            <input type="text" class="input-field" id="guest-username" placeholder="Username">
+            <button id="guest-button">Als Gast fortfahren</button>
+            <p id="alternative-text"><a href="#" id="registerLinkFromGuest">Registrieren</a> oder <a href="#" id="loginLinkFromGuest">Einloggen</a></p>
+        </div>
     </div>
 
     <footer>
-        <p>© 2025 Snake Strikers | Datenschutz | Impressum</p>
+        <p>© 2025 Snake Strikers | <a href="datenschutz.html">Datenschutz</a> | <a href="impressum.html">Impressum</a></p>
     </footer>
-
 </body>
 </html>
