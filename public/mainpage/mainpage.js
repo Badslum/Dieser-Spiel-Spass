@@ -314,9 +314,12 @@ document.getElementById("dropdownLogin").addEventListener("click", function(even
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* SNAKE ANIMATION
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
 /* SNAKE ANIMATION
 =======
 <<<<<<< HEAD
@@ -325,6 +328,7 @@ document.getElementById("dropdownLogin").addEventListener("click", function(even
 /* SNAKE ANIMATION
 >>>>>>> 7364c673941bffa42d8739797e5389767cb23011
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+<<<<<<< HEAD
 >>>>>>> backend
 =======
 
@@ -335,6 +339,8 @@ document.getElementById("dropdownLogin").addEventListener("click", function(even
 
 // SNAKE ANIMATION
 >>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
+=======
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
 
 const canvas = document.getElementById("snakeCanvas");
 const ctx = canvas.getContext("2d");
@@ -408,9 +414,13 @@ animate();
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 >>>>>>> backend
+=======
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
  */
 
 // MAUSZEIGER Snake Animation
@@ -546,6 +556,7 @@ animate();
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 7364c673941bffa42d8739797e5389767cb23011
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
@@ -553,3 +564,7 @@ animate();
 =======
 animate();
 >>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
+=======
+>>>>>>> 7364c673941bffa42d8739797e5389767cb23011
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
