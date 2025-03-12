@@ -32,7 +32,19 @@ document.getElementById("loginBtn").addEventListener("click", function () {
 });
 
 
+<<<<<<< HEAD
 /* SNAKE ANIMATION
+=======
+<<<<<<< HEAD
+/* SNAKE ANIMATION
+=======
+<<<<<<< HEAD
+// SNAKE ANIMATION
+=======
+/* SNAKE ANIMATION
+>>>>>>> 7364c673941bffa42d8739797e5389767cb23011
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> backend
 
 const canvas = document.getElementById("snakeCanvas");
 const ctx = canvas.getContext("2d");
@@ -100,6 +112,14 @@ function animate() {
 }
 
 animate();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> backend
  */
 
 // MAUSZEIGER Snake Animation
@@ -232,3 +252,10 @@ function animate() {
 }
 
 animate();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 7364c673941bffa42d8739797e5389767cb23011
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> backend
