@@ -6,7 +6,6 @@ const guestModal = document.getElementById('guestModal');
 const accountIcon = document.getElementById('accountIcon');
 const accountDropdown = document.getElementById('accountDropdown');
 
-// Modal-Links
 const registerLink = document.getElementById('registerLink');
 const guestLink = document.getElementById('guestLink');
 const loginLink = document.getElementById('loginLink');
@@ -14,7 +13,6 @@ const guestLinkFromRegister = document.getElementById('guestLinkFromRegister');
 const registerLinkFromGuest = document.getElementById('registerLinkFromGuest');
 const loginLinkFromGuest = document.getElementById('loginLinkFromGuest');
 
-// Buttons
 const loginButton = document.getElementById('login-button');
 const registerButton = document.getElementById('register-button');
 const guestButton = document.getElementById('guest-button');
@@ -175,13 +173,29 @@ function updateAccountDropdown() {
     const loggedInUser = sessionStorage.getItem('loggedInUser');
     const guestLoginOptions = document.getElementById("guestLoginOptions");
     const usernameDisplay = document.getElementById("usernameDisplay");
+    const dropdownLogin = document.getElementById("dropdownLogin");
+    const registerLink = document.getElementById("registerLink");
+    const dropdownLogout = document.getElementById("dropdownLogout");
 
     if (guestUser || loggedInUser) {
         usernameDisplay.textContent = guestUser || loggedInUser;
         guestLoginOptions.style.display = "block";
+
+        if (guestUser) {
+            dropdownLogin.style.display = "block";
+            registerLink.style.display = "block";
+            dropdownLogout.style.display = "block";
+        } else if (loggedInUser) {
+            dropdownLogin.style.display = "none";
+            registerLink.style.display = "none";
+            dropdownLogout.style.display = "block";
+        }
     } else {
-        usernameDisplay.textContent = "Benutzer";
+        usernameDisplay.textContent = "Account";
         guestLoginOptions.style.display = "none";
+        dropdownLogin.style.display = "none";
+        registerLink.style.display = "none";
+        dropdownLogout.style.display = "none";
     }
 }
 
@@ -214,7 +228,6 @@ function updateModalLinks() {
 }
 
 // === Event-Listener ===
-// Seite geladen
 document.addEventListener("DOMContentLoaded", function() {
     updateJoinButton();
     updateAccountDropdown();
@@ -222,7 +235,6 @@ document.addEventListener("DOMContentLoaded", function() {
     updateModalLinks();
 });
 
-// Login-Handler
 loginButton.addEventListener('click', function() {
     const username = document.getElementById('login-username');
     const password = document.getElementById('login-password');
@@ -240,7 +252,6 @@ loginButton.addEventListener('click', function() {
     }
 });
 
-// Registrierungs-Handler
 registerButton.addEventListener('click', function(event) {
     event.preventDefault();
     const username = document.getElementById('register-username');
@@ -254,7 +265,6 @@ registerButton.addEventListener('click', function(event) {
     }
 });
 
-// Gast-Login-Handler
 guestButton.addEventListener('click', function() {
     const usernameField = document.getElementById('guest-username');
     const username = usernameField.value.trim();
@@ -277,7 +287,6 @@ guestButton.addEventListener('click', function() {
     }
 });
 
-// Modal-Wechsel
 loginBtn.addEventListener('click', () => openModal(loginModal));
 registerLink.addEventListener('click', () => openModal(registerModal));
 guestLink.addEventListener('click', () => {
@@ -290,7 +299,6 @@ guestLinkFromRegister.addEventListener('click', () => {
 registerLinkFromGuest.addEventListener('click', () => openModal(registerModal));
 loginLinkFromGuest.addEventListener('click', () => openModal(loginModal));
 
-// Account-Dropdown
 accountIcon.addEventListener("click", (event) => {
     event.stopPropagation();
     updateAccountDropdown();
@@ -308,40 +316,31 @@ document.getElementById("dropdownLogin").addEventListener("click", function(even
     openModal(loginModal);
 });
 
+function logoutGuest() {
+    sessionStorage.removeItem('guestUser');
+    updateAccountDropdown();
+    updateJoinButton();
+    updateModalLinks();
+    accountDropdown.style.display = "none";
+}
 
-
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-/* SNAKE ANIMATION
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
-/* SNAKE ANIMATION
-=======
-<<<<<<< HEAD
-// SNAKE ANIMATION
-=======
-/* SNAKE ANIMATION
->>>>>>> 7364c673941bffa42d8739797e5389767cb23011
->>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
-<<<<<<< HEAD
->>>>>>> backend
-=======
-
-
-
-
-
+document.getElementById("dropdownLogout").addEventListener("click", function(event) {
+    event.preventDefault();
+    const guestUser = sessionStorage.getItem('guestUser');
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+    
+    if (guestUser) {
+        logoutGuest();
+    } else if (loggedInUser) {
+        sessionStorage.removeItem('loggedInUser');
+        updateAccountDropdown();
+        updateJoinButton();
+        updateModalLinks();
+        accountDropdown.style.display = "none";
+    }
+});
 
 // SNAKE ANIMATION
->>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
-=======
->>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
-
 const canvas = document.getElementById("snakeCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -352,6 +351,17 @@ window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 });
+
+function isCollidingWithInfoContainer(x, y) {
+    const infoContainer = document.querySelector('.info-container');
+    const rect = infoContainer.getBoundingClientRect();
+    return (
+        x >= rect.left &&
+        x <= rect.right &&
+        y >= rect.top &&
+        y <= rect.bottom
+    );
+}
 
 class Snake {
     constructor(color) {
@@ -365,92 +375,6 @@ class Snake {
     }
 
     move() {
-        this.angle += (Math.random() - 0.5) * 0.2; // Leichte Richtungsänderungen
-        this.x += Math.cos(this.angle) * this.speed;
-        this.y += Math.sin(this.angle) * this.speed;
-
-        if (this.x < 0) this.x = canvas.width;
-        if (this.x > canvas.width) this.x = 0;
-        if (this.y < 0) this.y = canvas.height;
-        if (this.y > canvas.height) this.y = 0;
-
-        this.path.push({ x: this.x, y: this.y });
-
-        if (this.path.length > this.maxLength) {
-            this.path.shift();
-        }
-    }
-
-    draw() {
-        for (let i = 0; i < this.path.length; i++) {
-            const opacity = i / this.path.length;
-            ctx.fillStyle = this.color.replace("X", opacity);
-            ctx.beginPath();
-            ctx.arc(this.path[i].x, this.path[i].y, 4, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-}
-
-const snakes = [];
-for (let i = 0; i < 10; i++) {
-    const color = i % 2 === 0 ? "rgba(0, 204, 255, X)" : "rgba(255, 50, 50, X)";
-    snakes.push(new Snake(color));
-}
-
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    snakes.forEach((snake) => {
-        snake.move();
-        snake.draw();
-    });
-    requestAnimationFrame(animate);
-}
-
-<<<<<<< HEAD
-animate();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
->>>>>>> backend
-=======
->>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
->>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
- */
-
-// MAUSZEIGER Snake Animation
-
-const canvas = document.getElementById("snakeCanvas");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
-
-// 🐍 Klasse für die Schlangen
-class Snake {
-    constructor(color) {
-        this.path = [];
-        this.maxLength = 50;
-        this.speed = Math.random() * 2 + 1;
-        this.angle = Math.random() * Math.PI * 2;
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.color = color;
-        this.active = true;
-    }
-
-    move() {
-        if (!this.active) return;
         this.angle += (Math.random() - 0.5) * 0.2;
         this.x += Math.cos(this.angle) * this.speed;
         this.y += Math.sin(this.angle) * this.speed;
@@ -467,104 +391,40 @@ class Snake {
         }
     }
 
+    shouldDraw() {
+        return !isCollidingWithInfoContainer(this.x, this.y);
+    }
+
     draw() {
-        if (!this.active) return;
-        for (let i = 0; i < this.path.length; i++) {
-            const opacity = i / this.path.length;
-            ctx.fillStyle = this.color.replace("X", opacity);
-            ctx.beginPath();
-            ctx.arc(this.path[i].x, this.path[i].y, 4, 0, Math.PI * 2);
-            ctx.fill();
+        if (!this.shouldDraw()) return;
+
+        ctx.beginPath();
+        ctx.strokeStyle = this.color.replace("X", 1); // Volle Opacity für die Linie
+        ctx.lineWidth = 2;
+
+        for (let i = 0; i < this.path.length - 1; i++) {
+            if (i === 0) {
+                ctx.moveTo(this.path[i].x, this.path[i].y);
+            }
+            ctx.lineTo(this.path[i + 1].x, this.path[i + 1].y);
         }
+        ctx.stroke();
     }
 }
 
-// 🎨 Blaue & Rote Schlangen erzeugen
 const snakes = [];
 for (let i = 0; i < 10; i++) {
-    const color = i % 2 === 0 ? "rgba(0, 204, 255, X)" : "rgba(255, 50, 50, X)";
+    const color = i % 2 === 0 ? "rgba(0, 204, 255, X)" : "rgba(255, 50, 50, X)"; // Blaue und rote Schlangen
     snakes.push(new Snake(color));
 }
 
-// 🖱 Spieler-Schlange (Maus-gesteuert)
-const playerSnake = new Snake(Math.random() > 0.5 ? "rgba(0, 204, 255, X)" : "rgba(255, 50, 50, X)");
-playerSnake.maxLength = 80;
-let lastMouseMove = Date.now();
-let isMoving = false;
-let targetX = canvas.width / 2;
-let targetY = canvas.height / 2;
-
-// 🎮 Mausbewegung steuert die Spieler-Schlange
-window.addEventListener("mousemove", (event) => {
-    targetX = event.clientX;
-    targetY = event.clientY;
-    lastMouseMove = Date.now();
-    isMoving = true;
-});
-
-// 🎯 Interpolation für weiche Bewegung
-function updatePlayerSnake() {
-    const lerpFactor = 0.1; // Sanfte Bewegung zur Mausposition
-    playerSnake.x += (targetX - playerSnake.x) * lerpFactor;
-    playerSnake.y += (targetY - playerSnake.y) * lerpFactor;
-
-    playerSnake.path.push({ x: playerSnake.x, y: playerSnake.y });
-
-    if (playerSnake.path.length > playerSnake.maxLength) {
-        playerSnake.path.shift();
-    }
-
-    // Überprüfen, ob die Maus inaktiv ist (nach 2 Sekunden)
-    if (Date.now() - lastMouseMove > 2000) {
-        isMoving = false;
-    }
-
-    // Falls inaktiv, langsam den Schweif ausblenden
-    if (!isMoving && playerSnake.path.length > 0) {
-        playerSnake.path.shift(); // Löscht langsam den Schweif
-    }
-}
-
-// ✨ Buttons deaktivieren die Spieler-Schlange beim Hover
-const buttons = document.querySelectorAll("button");
-buttons.forEach(button => {
-    button.addEventListener("mouseenter", () => {
-        playerSnake.active = false;
-    });
-    button.addEventListener("mouseleave", () => {
-        playerSnake.active = true;
-    });
-});
-
-// 🏃 Hauptanimations-Loop
 function animate() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height); // Hintergrund leicht transparent halten
-
-    snakes.forEach(snake => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    snakes.forEach((snake) => {
         snake.move();
         snake.draw();
     });
-
-    updatePlayerSnake(); // Bewegung aktualisieren
-    playerSnake.draw(); // Spieler-Schlange zeichnen
-
     requestAnimationFrame(animate);
 }
 
 animate();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 7364c673941bffa42d8739797e5389767cb23011
->>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
->>>>>>> backend
-=======
-animate();
->>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
-=======
->>>>>>> 7364c673941bffa42d8739797e5389767cb23011
->>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
->>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
