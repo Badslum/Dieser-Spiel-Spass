@@ -6,6 +6,7 @@
     <title>Snake Strikers</title>
     <link rel="stylesheet" href="mainpage.css">
     <script defer src="mainpage.js"></script>
+    
 </head>
 <body>
     <canvas id="snakeCanvas"></canvas>
@@ -15,16 +16,21 @@
         <h1 class="animated-title">Snake Strikers</h1>
     </div>
 
-    <!-- Account Icon -->
-    <div class="account-container">
-        <img src="account_icon.png" alt="Account" class="account-icon" id="accountIcon">
-        <div class="dropdown" id="accountDropdown">
-            <p id="usernameDisplay">Account</p>
-            <div id="guestLoginOptions" style="display: none;">
-                <a href="#" id="dropdownLogin">Einloggen / Registrieren</a>
-            </div>
+<!-- Account Icon -->
+<div class="account-container">
+    <img src="account_icon_white.png" alt="Account" class="account-icon" id="accountIcon">
+    <div class="dropdown" id="accountDropdown">
+        <p id="usernameDisplay">Account</p>
+        <div id="guestLoginOptions" style="display: none;">
+            <a href="#" id="dropdownLogin">Einloggen</a>
+            <a href="#" id="dropdownRegister">Registrieren</a>
+        </div>
+        <div id="loggedInOptions" style="display: none;">
+            <a href="#" id="changePassword">Passwort ändern</a>
+            <a href="#" id="logout">Ausloggen</a>
         </div>
     </div>
+</div>
 
     <div class="info-box">
         <h2>📛 Spielprinzip</h2>
@@ -80,6 +86,19 @@
             <p id="alternative-text"><a href="#" id="registerLinkFromGuest">Registrieren</a> oder <a href="#" id="loginLinkFromGuest">Einloggen</a></p>
         </div>
     </div>
+
+<!-- Change Password Modal -->
+<div id="changePasswordModal" class="modal">
+    <div class="modal-content">
+        <h2>Passwort ändern</h2>
+        <input type="password" class="input-field" id="new-password" placeholder="Neues Passwort">
+        <input type="password" class="input-field" id="confirm-new-password" placeholder="Neues Passwort bestätigen">
+        <button id="change-password-button">Passwort ändern</button>
+    </div>
+</div>
+
+<!-- Theme Toggle Button (vor dem Footer) -->
+<button id="themeToggle" class="theme-toggle">☀️</button>
 
     <footer>
         <p>© 2025 Snake Strikers | <a href="datenschutz.html">Datenschutz</a> | <a href="impressum.html">Impressum</a></p>
