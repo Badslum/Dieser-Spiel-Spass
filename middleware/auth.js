@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 // Middleware für Authentifizierung
 module.exports = function (req, res, next) {
-  // Token aus den Headern lesen
+  // Token aus den Headern lesen (x-auth-token)
   const token = req.header('x-auth-token');
 
   // Wenn kein Token vorhanden ist, zurückweisen
@@ -16,6 +16,7 @@ module.exports = function (req, res, next) {
     req.user = decoded.user;  // Benutzer-ID aus dem Token hinzufügen
     next();  // Weiter zur nächsten Middleware oder Route
   } catch (err) {
-    res.status(401).json({ msg: 'Token ist nicht gültig' });
+    console.error('Token-Fehler: ', err.message);  // Logge den Fehler zur Diagnose
+    res.status(401).json({ msg: 'Token ist nicht gültig oder abgelaufen' });
   }
 };

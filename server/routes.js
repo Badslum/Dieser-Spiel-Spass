@@ -1,88 +1,110 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
-const authMiddleware = require('../middleware/auth');  // Auth-Middleware importieren
+const authMiddleware = require('../middleware/auth');
+
 const router = express.Router();
 
-// Registrierung
+// Registrierungsroute
 router.post('/register', async (req, res) => {
-    const { username, password } = req.body;
+  const { username, password } = req.body;
 
+  try {
     // Überprüfen, ob der Benutzername bereits existiert
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-        return res.status(400).json({ message: 'Benutzername bereits vergeben' });
+    let user = await User.findOne({ username });
+    if (user) {
+      return res.status(400).json({ msg: 'Benutzername bereits vergeben' });
     }
+
+    // Neues Benutzerobjekt erstellen
+    user = new User({
+      username,
+      password
+    });
 
     // Passwort verschlüsseln
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    user.password = await bcrypt.hash(password, salt);
 
-    // Neuen Benutzer erstellen
-    const newUser = new User({ username, password: hashedPassword });
+    // Benutzer in der Datenbank speichern
+    await user.save();
 
-    try {
-        await newUser.save();
-        res.status(201).json({ message: 'Benutzer erfolgreich registriert' });
-    } catch (err) {
-        res.status(500).json({ message: 'Fehler bei der Registrierung', error: err });
-    }
+    // JWT erstellen
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Token zurückgeben
+    res.status(200).json({ message: 'Registrierung erfolgreich', token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Serverfehler');
+  }
 });
 
-// Login
+// Login-Route
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+  const { username, password } = req.body;
 
-    // Benutzer suchen
-    const user = await User.findOne({ username });
+  try {
+    // Benutzer anhand des Benutzernamens finden
+    let user = await User.findOne({ username });
     if (!user) {
-        return res.status(404).json({ message: 'Benutzer nicht gefunden' });
+      return res.status(400).json({ msg: 'Benutzer nicht gefunden' });
     }
 
     // Passwort überprüfen
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-        return res.status(400).json({ message: 'Falsches Passwort' });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: 'Ungültiges Passwort' });
     }
 
     // JWT erstellen
-    const token = jwt.sign({ userId: user._id }, 'secret-key', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
+    // Token zurückgeben
     res.status(200).json({ message: 'Erfolgreich eingeloggt', token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Serverfehler');
+  }
 });
 
-// Gastzugang
-router.get('/guest', (req, res) => {
-    // Kein Login oder Authentifizierung nötig für Gast
-    res.status(200).json({ message: 'Gastzugang erfolgreich' });
+// Gastzugangsroute (direkt mit JWT erstellen)
+router.post('/guest', (req, res) => {
+  // Ein Gastbenutzer wird erstellt, ohne sich zu registrieren
+  const guestUser = { username: 'Gast_' + new Date().getTime() }; // Beispiel für einen Gastbenutzernamen
+
+  // JWT für den Gast erstellen (keine Datenbank erforderlich)
+  const token = jwt.sign({ userId: guestUser.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+  // Erfolgreiche Antwort mit Token
+  res.status(200).json({ message: 'Gastzugang gewährt', token });
 });
 
-// Route, um den Status des Benutzers zu ändern (z.B. aktiv oder deaktiviert)
+// Route zum Überprüfen des Status eines Benutzers (z.B. aktiv oder deaktiviert)
 router.put('/update-status', authMiddleware, async (req, res) => {
-    const { status } = req.body;
+  const { status } = req.body;
 
-    try {
-        const user = await User.findById(req.user.id);
-        if (!user) {
-            return res.status(400).json({ msg: 'Benutzer nicht gefunden' });
-        }
-
-        // Status aktualisieren (z.B. aktiv/deaktiviert)
-        user.status = status || 'active'; // Default auf 'active'
-        await user.save();
-
-        res.json({ msg: 'Benutzerstatus erfolgreich aktualisiert', status: user.status });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Serverfehler');
+  try {
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(400).json({ msg: 'Benutzer nicht gefunden' });
     }
+
+    // Status aktualisieren (z.B. aktiv/deaktiviert)
+    user.status = status || 'active'; // Standardwert 'active'
+    await user.save();
+
+    res.json({ msg: 'Benutzerstatus erfolgreich aktualisiert', status: user.status });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Serverfehler');
+  }
 });
 
 // Logout-Route (Token zurücksetzen)
 router.post('/logout', (req, res) => {
-    // Hier könnte man die Logout-Logik implementieren, z.B. Token auf der Client-Seite ungültig machen
-    res.json({ msg: 'Logout erfolgreich' });
+  res.json({ msg: 'Logout erfolgreich' });
 });
 
 module.exports = router;
