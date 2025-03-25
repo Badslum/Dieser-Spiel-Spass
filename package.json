@@ -4,7 +4,6 @@
   "description": "Projekt in Fortgeschrittene Systementwicklung",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",  
     "test": "mocha"
   },
   "keywords": [
