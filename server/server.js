@@ -12,6 +12,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
+// Middleware zum Parsen von JSON-Daten im Body
+app.use(express.json());  // Füge dies hinzu, damit JSON-Daten verarbeitet werden können
+
 // Stellt die Verbindung zur MongoDB her
 connectDB();
 
