@@ -4,10 +4,11 @@
   "description": "Projekt in Fortgeschrittene Systementwicklung",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",  
     "test": "mocha"
   },
   "keywords": [
-    "Snakes, Snake, Snider, Systementwicklung, Game, SnakeSniders"
+    "Snakes", "Snake", "Snider", "Systementwicklung", "Game", "SnakeSniders"
   ],
   "author": "BastianRoth, MiriamLeixner",
   "license": "ISC",
