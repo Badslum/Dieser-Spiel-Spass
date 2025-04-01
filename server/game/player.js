@@ -19,7 +19,8 @@ let player = {
     alive: true,
     x: 0,
     y: 0,
-    //To do define working tail  tail: [x,y]
+    tail: 0,
+    pos_changed: false
 }
 let direction = ""
 
@@ -49,14 +50,21 @@ function movePlayer(player, direction) {
             player.x += 1;
             break;
     }
+   player.pos_changed = true;
 
+    setTimeout(() => {
+        player.pos_changed = false;
+    }, 500);
 }
 
 // Create "tail" for player, evtl with length restrictions?
-//Tail starts at players territory and grows with each step the player takes
-//function createTail
-
-
+// Tail starts at players territory and grows with each step the player takes
+// function createTail
+function createTail(player, pos_changed) {
+    if (pos_changed === true) {
+        player.tail += 1;
+    }
+}
 
 //function checkTeam
 function checkTeam(player){
@@ -90,6 +98,8 @@ module.exports = {
     movePlayer
 };
 
+<<<<<<< HEAD
+=======
 //Tests
 <<<<<<< HEAD
 =======
@@ -129,3 +139,4 @@ console.log("Player belongs to team 1 (blue)");
 console.log("Player belongs to team 1 (blue)");
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 >>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c

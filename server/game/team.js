@@ -12,6 +12,9 @@
 // ToDo for Miriam
 
 
+// ToDo for Miriam
+
+
 //definition of variables
 let team = {
     id: 0,
@@ -47,6 +50,10 @@ function createTeam(playerPool, x) {
 
 //To Do: Assign percententage of gameboard to each team? Varible needed?
 
+<<<<<<< HEAD
+//export the functions
+module.exports = { createTeam };
+=======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -84,3 +91,4 @@ console.log(`Team 3 Color: ${teams[2].color}`);
 console.log(`Team 3 Color: ${teams[2].color}`);
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 >>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c

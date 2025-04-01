@@ -22,7 +22,11 @@
 >>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
   },
   "keywords": [
+<<<<<<< HEAD
+    "Snakes", "Snake", "Snider", "Systementwicklung", "Game", "SnakeSniders"
+=======
     "Snakes, Snake, Snider, Systementwicklung, Game, SnakeSniders"
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c
   ],
   "author": "BastianRoth, MiriamLeixner",
   "license": "ISC",
