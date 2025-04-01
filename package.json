@@ -4,10 +4,29 @@
   "description": "Projekt in Fortgeschrittene Systementwicklung",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
+<<<<<<< HEAD
     "test": "mocha"
+=======
+    "start": "node server/server.js",
+    "test": "mocha",
+    "lint": "eslint ."
+>>>>>>> backend
+=======
+    "start": "node server/server.js",
+    "test": "mocha",
+    "lint": "eslint ."
+=======
+    "test": "mocha"
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
   },
   "keywords": [
+<<<<<<< HEAD
     "Snakes", "Snake", "Snider", "Systementwicklung", "Game", "SnakeSniders"
+=======
+    "Snakes, Snake, Snider, Systementwicklung, Game, SnakeSniders"
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c
   ],
   "author": "BastianRoth, MiriamLeixner",
   "license": "ISC",
@@ -22,6 +41,20 @@
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "@eslint/js": "^9.21.0",
+    "eslint": "^8.57.1",
+    "globals": "^16.0.0",
+>>>>>>> backend
+=======
+    "@eslint/js": "^9.21.0",
+    "eslint": "^8.57.1",
+    "globals": "^16.0.0",
+=======
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
     "mocha": "^10.2.0"
   }
 }

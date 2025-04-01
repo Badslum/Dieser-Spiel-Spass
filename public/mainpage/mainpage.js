@@ -314,9 +314,18 @@ document.getElementById("dropdownLogin").addEventListener("click", function(even
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* SNAKE ANIMATION
 =======
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/* SNAKE ANIMATION
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c
 /* SNAKE ANIMATION
 =======
 <<<<<<< HEAD
@@ -325,6 +334,10 @@ document.getElementById("dropdownLogin").addEventListener("click", function(even
 /* SNAKE ANIMATION
 >>>>>>> 7364c673941bffa42d8739797e5389767cb23011
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c
 >>>>>>> backend
 =======
 
@@ -335,6 +348,11 @@ document.getElementById("dropdownLogin").addEventListener("click", function(even
 
 // SNAKE ANIMATION
 >>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c
 
 const canvas = document.getElementById("snakeCanvas");
 const ctx = canvas.getContext("2d");
@@ -408,9 +426,19 @@ animate();
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
 >>>>>>> backend
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> backend
+=======
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c
  */
 
 // MAUSZEIGER Snake Animation
@@ -546,6 +574,10 @@ animate();
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c
 =======
 >>>>>>> 7364c673941bffa42d8739797e5389767cb23011
 >>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
@@ -553,3 +585,10 @@ animate();
 =======
 animate();
 >>>>>>> 7fc66adf4deb3a3e74493faa0e911c4db1025714
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7364c673941bffa42d8739797e5389767cb23011
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c

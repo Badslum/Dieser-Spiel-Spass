@@ -98,3 +98,45 @@ module.exports = {
     movePlayer
 };
 
+<<<<<<< HEAD
+=======
+//Tests
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/*
+=======
+
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
+//Test for createPLayer
+const player1 = createPlayer(`testuser`, 123);
+console.log("Player name should be: testuser");
+console.log("Player name is:"  + player1.name);
+console.log("Player id should be: 123");
+console.log("Player id is: " + player1.id);
+
+//Test for movePlayer
+player.x = 0;
+player.y = 0;
+movePlayer(player, "up");
+movePlayer(player, "right");
+
+console.log("player position should be: 1, 1");
+console.log("player position is: " + `${player.x}, ${player.y}`);
+
+//Test for checkTeam
+player1.teamid = 2;
+checkTeam(player1);
+<<<<<<< HEAD
+
+console.log("Player belongs to team 1 (blue)");
+=======
+<<<<<<< HEAD
+console.log("Player belongs to team 1 (blue)");
+*/
+=======
+console.log("Player belongs to team 1 (blue)");
+>>>>>>> 87aa22fc90281b80f247e25cedb9fcdd22d1a620
+>>>>>>> 4459c815ce204b35e50557112927e208c7a0773b
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c

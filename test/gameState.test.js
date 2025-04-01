@@ -1,6 +1,7 @@
 // 
 // Description: Test check for Player amount, Test Check for % of Territories, Test gain Territory
 // 
+<<<<<<< HEAD
 // ToDo for Christian Weisbrod
 
 const gameState = require("../server/game/gameState");
@@ -49,3 +50,20 @@ console.log(gameState.getTop3Players());
 
 // Test beenden
 process.exit(0);
+=======
+// ToDo for Christian Weissbrod
+
+//remove comment and insert own functions and varibles and adapt the example test to your needs
+/*
+const assert = require('assert');
+const {functions} = require('../server/game/gameState');
+
+describe('describtion for test', function() {
+  it('should do what?', function() {
+    const variable_x = function(varible_y, vabible_z);
+    assert.strictEqual(variable_x, expected_value);
+    assert.strictEqual(variable_z, expected_value);
+  });
+});
+*/
+>>>>>>> 40c9f94b97e09837f32932d1a832e2a08253f71c

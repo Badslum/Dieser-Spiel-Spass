@@ -1,4 +1,3 @@
-// Gain Territory
 // Check for Player amount
 // Check for % of Territories
 //
